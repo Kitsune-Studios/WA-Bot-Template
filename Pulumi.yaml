@@ -1,0 +1,7 @@
+
+name: wa-bot-template
+runtime:
+  name: python
+  description: A minimal fastapi app
+  
+    
