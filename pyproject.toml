@@ -9,6 +9,7 @@ dependencies = [
     "fastapi[standard]>=0.115.6",
     "mangum>=0.19.0",
     "ngrok>=1.4.0",
+    "pulumi>=3.145.0",
     "requests>=2.32.3",
 ]
 
