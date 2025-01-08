@@ -1,12 +1,12 @@
+import json
+
 import boto3
 from botocore.exceptions import ClientError
-import json
 
 ## There needs to be a secret created in the AWS account with the values obtained from Facebook Business Platform
 
 
 def get_secret(secret_name: str | None = None, region_name: str = "us-east-1"):
-
     # Create a Secrets Manager client
     session = boto3.session.Session()
     client = session.client(service_name="secretsmanager", region_name=region_name)
