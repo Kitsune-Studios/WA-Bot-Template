@@ -5,30 +5,64 @@ on:
   push:
     branches:
       - main
-jobs:
-  nox-automation:
-    name: Python Quality & Tests
-    runs-on: ubuntu-latest
 
+jobs:
+  setup:
+    name: Setup
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version:
+          - "3.10"
+          - "3.11"
+          - "3.12"
+          - "3.13"
     steps:
       - uses: actions/checkout@v4
-
-      - name: Install uv
+      - name: Install uv and set the python version
         uses: astral-sh/setup-uv@v5
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
         with:
-          python-version-file: "pyproject.toml"
+          python-version: ${{ matrix.python-version }}
+      - name: Install nox
+        run: uv add nox
 
+  format:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
       - name: Install nox
         run: pip install nox
-
       - name: Run format checks
         run: nox -s format
 
+  lint:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install nox
+        run: pip install nox
       - name: Run linting
         run: nox -s lint
 
+  test:
+    needs: setup
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version:
+          - "3.10"
+          - "3.11"
+          - "3.12"
+          - "3.13"
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install uv and set python version
+        uses: astral-sh/setup-uv@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install nox
+        run: pip install nox
       - name: Run tests
         run: nox -s test
