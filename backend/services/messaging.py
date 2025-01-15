@@ -2,7 +2,7 @@ import json
 
 import requests
 
-from app.auth import ACCESS_TOKEN, PHONE_NUMBER_ID, VERSION
+from backend.auth import ACCESS_TOKEN, PHONE_NUMBER_ID, VERSION
 
 HEADERS = {
     "Content-type": "application/json",

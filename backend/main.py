@@ -5,7 +5,7 @@ import ngrok
 from fastapi import FastAPI, status
 from mangum import Mangum
 
-from app.routers.messages import messages
+from backend.routers.messages import messages
 
 from .auth import NGROK_AUTH_TOKEN, NGROK_DOMAIN
 
