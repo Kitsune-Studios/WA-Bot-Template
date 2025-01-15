@@ -19,11 +19,12 @@ dependencies = [
 dev = [
     "black>=24.10.0",
     "darglint>=1.8.1",
-    "flake8>=7.1.1",
-    "flake8-bandit>=4.1.1",
-    "flake8-bugbear>=24.12.12",
-    "flake8-import-order>=0.18.2",
-    "flake8-pyproject>=1.2.3",
     "isort>=5.13.2",
+    "pytest>=8.3.4",
+    "pytest-cov>=6.0.0",
     "ruff>=0.8.6",
+    "wa-bot-template",
 ]
+
+[tool.uv.sources]
+wa-bot-template = { workspace = true }

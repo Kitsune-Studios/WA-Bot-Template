@@ -9,7 +9,11 @@ backend = "uv"  # or "venv" or "conda"
 # nox options
 
 # default sessions to run
-nox.options.sessions = ["format", "lint", "test"]  # default sessions to run
+nox.options.sessions = [
+    "format",
+    "lint",
+    "test",
+]  # default sessions to run, order matters
 
 
 # nox automation to run the project using uv
@@ -32,19 +36,9 @@ def format(session: Session) -> None:
 
 @nox.session(python=python_matrix, venv_backend=backend)
 def lint(session: Session) -> None:
-    """Run flake8."""
-    session.run(
-        "uv",
-        "add",
-        "--dev",
-        "flake8",
-        "flake8-bugbear",
-        "flake8-import-order",
-        "flake8-pyproject",
-        "flake8-bandit",
-        "darglint",
-    )
-    session.run("flake8", ".")
+    """Run ruff."""
+    session.run("uv", "add", "--dev", "ruff")
+    session.run("ruff", "check", ".")
 
 
 # nox automation to run the project using docker
