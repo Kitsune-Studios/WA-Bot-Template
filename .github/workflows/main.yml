@@ -26,8 +26,6 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Sync the dependencies from the pyproject.toml
         run: uv sync --all-extras --dev
-      - name: Install the dependencies
-        run: uv install
 
   test:
     name: Test Suite
