@@ -10,9 +10,10 @@ dependencies = [
     "mangum>=0.19.0",
     "ngrok>=1.4.0",
     "nox>=2024.10.9",
-    "pulumi>=3.145.0",
     "pulumi-aws>=6.66.3",
     "requests>=2.32.3",
+    "uv>=0.5.19",
+    "uvicorn>=0.34.0",
 ]
 
 [dependency-groups]
@@ -21,9 +22,10 @@ dev = [
     "isort>=5.13.2",
     "pytest>=8.3.4",
     "pytest-cov>=6.0.0",
-    "ruff>=0.8.6",
     "wa-bot-template",
 ]
 
-[tool.uv.sources]
-wa-bot-template = { workspace = true }
+[tool.uv]
+preview = true
+default-groups = ["dev"]
+managed = true
