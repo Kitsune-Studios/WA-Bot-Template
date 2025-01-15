@@ -32,8 +32,11 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
       - name: Run the tests
-        run: uv test
+        run: uv run pytest --cov=app tests/
 
   deploy:
     name: Deploy
