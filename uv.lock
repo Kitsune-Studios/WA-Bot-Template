@@ -644,6 +644,36 @@ wheels = [
 ]
 
 [[package]]
+name = "pulumi-awsx"
+version = "2.20.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "parver" },
+    { name = "pulumi" },
+    { name = "pulumi-aws" },
+    { name = "pulumi-docker-build" },
+    { name = "semver" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/9c/3f/b1b3e2164663c496d1dc421b188a379b296c9a737fdc8fed20c1f2e03d7d/pulumi_awsx-2.20.1.tar.gz", hash = "sha256:7417f1bca7e1e2aaa4c323c2f8269d7709d3bde67d4265029ac18abdce2b325f", size = 102361 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/81/49/69a1b9512889d8c319599d0f5e98d9642a42a5d22e4f9e55332f989f5cbb/pulumi_awsx-2.20.1-py3-none-any.whl", hash = "sha256:6d0b198d4f0a051e5b51ea49dd6f66150e736fc364952a5e09b3564c6bee4a19", size = 117372 },
+]
+
+[[package]]
+name = "pulumi-docker-build"
+version = "0.0.8"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "parver" },
+    { name = "pulumi" },
+    { name = "semver" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/6c/c5/1563f76ce8cb65d6fdda7fea975747717c7c5e19c3d5de368d4deabd5942/pulumi_docker_build-0.0.8.tar.gz", hash = "sha256:ddb19db072cff03d21e38354d4634d22329f2cf27d2c4db60e43289a2807156e", size = 38908 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/b4/14/197115a315442af656b3a675a4c48996b757605d36b7027e90574ae88cae/pulumi_docker_build-0.0.8-py3-none-any.whl", hash = "sha256:00b92dd89b060b0a0d0af7794e22f0d1f94ef569b56d73adee03a9fbbc622373", size = 43487 },
+]
+
+[[package]]
 name = "pydantic"
 version = "2.10.4"
 source = { registry = "https://pypi.org/simple" }
@@ -1042,6 +1072,7 @@ dependencies = [
     { name = "ngrok" },
     { name = "nox" },
     { name = "pulumi-aws" },
+    { name = "pulumi-awsx" },
     { name = "requests" },
     { name = "uv" },
     { name = "uvicorn" },
@@ -1065,6 +1096,7 @@ requires-dist = [
     { name = "ngrok", specifier = ">=1.4.0" },
     { name = "nox", specifier = ">=2024.10.9" },
     { name = "pulumi-aws", specifier = ">=6.66.3" },
+    { name = "pulumi-awsx", specifier = ">=2.20.1" },
     { name = "requests", specifier = ">=2.32.3" },
     { name = "uv", specifier = ">=0.5.19" },
     { name = "uvicorn", specifier = ">=0.34.0" },
