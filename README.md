@@ -23,6 +23,7 @@ A WhatsApp bot template built with FastAPI and uv package manager, designed to b
 - fastapi
 - mangum
 - ngrok
+- nox
 - pulumi
 - requests
 
@@ -54,6 +55,16 @@ docker run -p 80:80 wa-bot
 
 For development, additional tools are available:
 - Ruff for linting and formatting
+- Nox for automated testing and development tasks
+
+Run development tasks with nox:
+```bash
+# Run all default sessions (format, lint, test)
+nox
+
+# Run specific session
+nox -s test
+```
 
 ## License
 

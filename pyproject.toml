@@ -10,11 +10,20 @@ dependencies = [
     "mangum>=0.19.0",
     "ngrok>=1.4.0",
     "nox>=2024.10.9",
-    "pulumi[aws]>=3.145.0",
+    "pulumi>=3.145.0",
+    "pulumi-aws>=6.66.3",
     "requests>=2.32.3",
 ]
 
 [dependency-groups]
 dev = [
+    "black>=24.10.0",
+    "darglint>=1.8.1",
+    "flake8>=7.1.1",
+    "flake8-bandit>=4.1.1",
+    "flake8-bugbear>=24.12.12",
+    "flake8-import-order>=0.18.2",
+    "flake8-pyproject>=1.2.3",
+    "isort>=5.13.2",
     "ruff>=0.8.6",
 ]

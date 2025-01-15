@@ -1,11 +1,13 @@
-from fastapi import FastAPI, status
-import ngrok
 from contextlib import asynccontextmanager
-
-from mangum import Mangum
 from datetime import datetime
+
+import ngrok
+from fastapi import FastAPI, status
+from mangum import Mangum
+
 from app.routers.messages import messages
-from .auth import NGROK_DOMAIN, NGROK_AUTH_TOKEN
+
+from .auth import NGROK_AUTH_TOKEN, NGROK_DOMAIN
 
 APPLICATION_PORT = 8000
 

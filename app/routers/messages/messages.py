@@ -1,12 +1,11 @@
 from fastapi import APIRouter, Request, status
 from fastapi.responses import PlainTextResponse
 
+from app.auth import VERIFY_TOKEN
+from app.routers.utils import get_wa_data, is_user_message
 from app.services.messaging import send_message
 
 from .templates import hello_world
-
-from app.routers.utils import is_user_message, get_wa_data
-from app.auth import VERIFY_TOKEN
 
 router = APIRouter()
 
