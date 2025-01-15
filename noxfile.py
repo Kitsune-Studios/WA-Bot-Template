@@ -1,3 +1,5 @@
+from typing import List
+
 import nox
 from nox.sessions import Session
 
@@ -10,9 +12,7 @@ backend = "uv"  # or "venv" or "conda"
 
 # default sessions to run
 nox.options.sessions = [
-    "lint",
-    "format",
-    # "test",
+    "dev",
 ]  # default sessions if run locally, order matters
 
 
@@ -42,6 +42,6 @@ def test(session: Session) -> None:
 
 # non-default sessions to run
 @nox.session(python=python_version, venv_backend=backend)
-def dev(session: Session) -> None:
+def dev(session: Session, params: List[str]) -> None:
     """Run the project using docker."""
     session.run("docker-compose", "up", "--build")
