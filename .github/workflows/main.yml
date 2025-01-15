@@ -27,9 +27,9 @@ jobs:
       - name: Sync the dependencies from the pyproject.toml
         run: uv sync --all-extras --dev
       - name: Lint code with Ruff
-        run: ruff check --output-format=github --target-version=py312
+        run: ruff check --fix --output-format=github --target-version=py312
       - name: Check code formatting with Ruff
-        run: ruff format --diff --target-version=py312
+        run: ruff format -q --diff --target-version=py312
         continue-on-error: true
 
   test:

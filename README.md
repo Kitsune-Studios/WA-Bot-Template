@@ -29,6 +29,21 @@ A WhatsApp bot template built with FastAPI and uv package manager, designed to b
 
 ## Quick Start
 
+Before you begin, ensure you have `uv` installed. You can install it using:
+
+```bash
+winget install --id=astral-sh.uv  -e # Windows
+```
+
+```bash
+brew install uv # macOS
+```
+
+```bash
+curl -fsSL https://deno.land/x/install/install.sh | sh # Linux
+```
+
+for more information about installation and shell autocomplete, please visit this [guide](https://docs.astral.sh/uv/getting-started/installation/).
 ### Local Development
 
 1. Clone the repository

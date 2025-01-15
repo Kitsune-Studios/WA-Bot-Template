@@ -10,28 +10,27 @@ backend = "uv"  # or "venv" or "conda"
 
 # default sessions to run
 nox.options.sessions = [
-    "format",
     "lint",
-    "test",
-]  # default sessions to run, order matters
+    "format",
+    # "test",
+]  # default sessions if run locally, order matters
 
 
 # nox automation to run the project using uv
 
 
 @nox.session(python=python_matrix, venv_backend=backend)
-def format(session: Session) -> None:
-    """Run black and isort."""
-    session.run("uv", "add", "--dev", "black", "isort")
-    session.run("isort", ".")
-    session.run("black", ".")
+def lint(session: Session) -> None:
+    """Run ruff linter."""
+    session.run("uv", "add", "--dev", "ruff")
+    session.run("ruff", "check", ".")
 
 
 @nox.session(python=python_matrix, venv_backend=backend)
-def lint(session: Session) -> None:
-    """Run ruff."""
+def format(session: Session) -> None:
+    """Run ruff formatter."""
     session.run("uv", "add", "--dev", "ruff")
-    session.run("ruff", "check", ".")
+    session.run("ruff", "format", "--target-version=py312", ".")
 
 
 @nox.session(python=python_matrix, venv_backend=backend)
@@ -43,6 +42,6 @@ def test(session: Session) -> None:
 
 # non-default sessions to run
 @nox.session(python=python_version, venv_backend=backend)
-def run(session: Session) -> None:
+def dev(session: Session) -> None:
     """Run the project using docker."""
     session.run("docker-compose", "up", "--build")
