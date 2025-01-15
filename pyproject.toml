@@ -22,6 +22,7 @@ dev = [
     "isort>=5.13.2",
     "pytest>=8.3.4",
     "pytest-cov>=6.0.0",
+    "ruff>=0.9.1",
     "wa-bot-template",
 ]
 
@@ -29,3 +30,6 @@ dev = [
 preview = true
 default-groups = ["dev"]
 managed = true
+
+[tool.uv.sources]
+wa-bot-template = { workspace = true }

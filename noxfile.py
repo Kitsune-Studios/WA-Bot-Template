@@ -11,10 +11,13 @@ backend = "uv"  # or "venv" or "conda"
 
 # nox options
 
-# default sessions to run
+# default sessions when run nox. By default, nox will run all sessions on the list
 nox.options.sessions = [
     "dev",
-]  # default sessions if run locally, order matters
+    "lint",
+    "format",
+    "test",
+]
 
 
 # nox automation to run the project using uv
@@ -23,21 +26,19 @@ nox.options.sessions = [
 @nox.session(python=python_matrix, venv_backend=backend)
 def lint(session: Session) -> None:
     """Run ruff linter."""
-    session.run("uv", "add", "--dev", "ruff")
-    session.run("ruff", "check", ".")
+    session.run("uvx", "ruff", "check", ".")
 
 
 @nox.session(python=python_matrix, venv_backend=backend)
 def format(session: Session) -> None:
     """Run ruff formatter."""
-    session.run("uv", "add", "--dev", "ruff")
-    session.run("ruff", "format", "--target-version=py312", ".")
+    session.run("uvx", "ruff", "format", "--target-version=py312", ".")
 
 
 @nox.session(python=python_matrix, venv_backend=backend, reuse_venv=True)
 def test(session: Session) -> None:
     """Run the pytest test suite."""
-    session.run("uv", "add", "--dev", "pytest", "pytest-cov", ".")
+    session.run("uv", "")
     session.run("pytest", "--cov", env={"COVERAGE_FILE": ".coverage"})
 
 

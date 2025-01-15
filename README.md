@@ -54,7 +54,7 @@ uv sync
 3. Set up environment variables
 4. Run the server:
 ```bash
-uvicorn app.main:app --reload
+uvicorn backend.main:app --reload
 ```
 
 ### Docker Deployment
