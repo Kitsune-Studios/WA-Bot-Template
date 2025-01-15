@@ -20,13 +20,6 @@ nox.options.sessions = [
 
 
 @nox.session(python=python_matrix, venv_backend=backend)
-def test(session: Session) -> None:
-    """Run the test suite."""
-    session.run("uv", "add", "--dev", "pytest", "pytest-cov", ".")
-    session.run("pytest", "--cov", env={"COVERAGE_FILE": ".coverage"})
-
-
-@nox.session(python=python_matrix, venv_backend=backend)
 def format(session: Session) -> None:
     """Run black and isort."""
     session.run("uv", "add", "--dev", "black", "isort")
@@ -41,8 +34,15 @@ def lint(session: Session) -> None:
     session.run("ruff", "check", ".")
 
 
-# nox automation to run the project using docker
+@nox.session(python=python_matrix, venv_backend=backend)
+def test(session: Session) -> None:
+    """Run the test suite."""
+    session.run("uv", "add", "--dev", "pytest", "pytest-cov", ".")
+    session.run("pytest", "--cov", env={"COVERAGE_FILE": ".coverage"})
+
+
+# non-default sessions to run
 @nox.session(python=python_version, venv_backend=backend)
-def local_docker(session: Session) -> None:
+def run(session: Session) -> None:
     """Run the project using docker."""
     session.run("docker-compose", "up", "--build")
