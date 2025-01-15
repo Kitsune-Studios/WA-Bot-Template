@@ -17,13 +17,12 @@ dependencies = [
 
 [dependency-groups]
 dev = [
-    "black>=24.10.0",
     "darglint>=1.8.1",
     "isort>=5.13.2",
     "pytest>=8.3.4",
     "pytest-cov>=6.0.0",
     "ruff>=0.8.6",
-    "wa-bot-template",
+    # "wa-bot-template",
 ]
 
 [tool.uv.sources]

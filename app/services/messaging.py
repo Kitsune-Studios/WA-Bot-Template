@@ -35,7 +35,6 @@ def format_template_message_input(recipient: str, template_name: str) -> str:
 
 
 def send_message(recipient: str, text: str):
-
     message = format_text_message_input(recipient, text)
 
     response = requests.post(URL, data=message, headers=HEADERS)

@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    name: Build
+    name: Build & Sync Dependencies
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -26,6 +26,11 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Sync the dependencies from the pyproject.toml
         run: uv sync --all-extras --dev
+      - name: Lint code with Ruff
+        run: ruff check --output-format=github --target-version=py312
+      - name: Check code formatting with Ruff
+        run: ruff format --diff --target-version=py312
+        continue-on-error: true
 
   test:
     name: Test Suite

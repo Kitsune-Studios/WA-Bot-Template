@@ -7,7 +7,6 @@ def is_user_message(data):
 
 
 def get_wa_data(wa_data):
-
     data = wa_data["entry"][0]
     conversation_data = data["changes"][0]["value"]
 
