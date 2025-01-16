@@ -3,7 +3,7 @@ name = "wa-bot-template"
 version = "0.1.1"
 description = "Template for WA bot using fastapi and uv"
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.11"
 dependencies = [
     "boto3>=1.35.94",
     "fastapi[standard]>=0.115.6",

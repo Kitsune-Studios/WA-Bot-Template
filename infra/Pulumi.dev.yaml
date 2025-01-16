@@ -1,2 +1,2 @@
 config:
-  gcp:project: effortless-fort-428116-q7
+  gcp:project: ${env:GCP_PROJECT_ID}

@@ -43,19 +43,19 @@ jobs:
       - name: Run the tests
         run: uv run pytest --cov=app
 
-  deploy:
-    name: Deploy
-    needs: test
+  preview:
+    name: Pulumi Preview
+    needs:
+      - build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Install Pulumi
-        run: curl -fsSL https://get.pulumi.com | sh
-      - name: Authenticate with Pulumi Service
-        run: pulumi login
+      - uses: pulumi/actions@v6
+        with:
+          command: preview
+          stack-name: kitsune-studios/deployments/dev
         env:
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
-      - name: go to the pulumi directory
-        run: cd infra/
-      - name: Deploy using Pulumi
-        run: pulumi up --yes
+          GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+          GCP_REGION: ${{ secrets.GCP_REGION }}
+          GCP_BUCKET: ${{ secrets.GCP_BUCKET }}
