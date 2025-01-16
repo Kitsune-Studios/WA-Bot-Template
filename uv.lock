@@ -690,6 +690,34 @@ wheels = [
 ]
 
 [[package]]
+name = "pulumi-gcp"
+version = "8.14.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "parver" },
+    { name = "pulumi" },
+    { name = "semver" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/38/51/cd2ca984919d748ecb9a970a793a3b731b64af71db5713ed90b62f5ece0b/pulumi_gcp-8.14.0.tar.gz", hash = "sha256:334dc37c58bd203c024044cefe3d4543d8898921d718ca642c75f0331518df74", size = 6714591 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/2f/ff/e5cc25da4777ef8ed61d215655b5a9fd6ecfae33187913710ec856f52e8b/pulumi_gcp-8.14.0-py3-none-any.whl", hash = "sha256:1d9e13d705c053eba620edcb40916df88cff00003dc868d950d6d8ae4bed6a69", size = 8569668 },
+]
+
+[[package]]
+name = "pulumi-random"
+version = "4.16.8"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "parver" },
+    { name = "pulumi" },
+    { name = "semver" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/d1/2c/681f1ac76133a6ebdf3b485006fc167a6a7fd9a7c3e82316158257ebcd79/pulumi_random-4.16.8.tar.gz", hash = "sha256:0112e10e3c8096b6e6fa05974bcefcf2f7731081035191860a2e7d6c0e4ef09f", size = 21172 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/c5/dc/6bb9083f6d00e94884cb7b312bfc45489993627caaca38c3e1476b3b68e1/pulumi_random-4.16.8-py3-none-any.whl", hash = "sha256:ba1b1fd6532988b1977e4bc8243d5b6f3c048c40f5919fcc70061088f37ebb51", size = 30811 },
+]
+
+[[package]]
 name = "pydantic"
 version = "2.10.4"
 source = { registry = "https://pypi.org/simple" }
@@ -1064,6 +1092,8 @@ dependencies = [
     { name = "nox" },
     { name = "pulumi-awsx" },
     { name = "pulumi-esc-sdk" },
+    { name = "pulumi-gcp" },
+    { name = "pulumi-random" },
     { name = "requests" },
     { name = "uv" },
     { name = "uvicorn" },
@@ -1086,6 +1116,8 @@ requires-dist = [
     { name = "nox", specifier = ">=2024.10.9" },
     { name = "pulumi-awsx", specifier = ">=2.20.1" },
     { name = "pulumi-esc-sdk", specifier = ">=0.11.0" },
+    { name = "pulumi-gcp", specifier = ">=8.14.0" },
+    { name = "pulumi-random", specifier = ">=4.16.8" },
     { name = "requests", specifier = ">=2.32.3" },
     { name = "uv", specifier = ">=0.5.19" },
     { name = "uvicorn", specifier = ">=0.34.0" },
