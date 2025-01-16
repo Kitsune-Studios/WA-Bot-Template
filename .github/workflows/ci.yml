@@ -22,8 +22,8 @@ jobs:
       matrix:
         python-version:
           - "3.11"
-          - "3.12"
-          # add more python versions here
+          # uncomment add more python versions here
+          # - "3.12"
           # - "3.13"
 
     steps:
