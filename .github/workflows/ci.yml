@@ -55,19 +55,32 @@ jobs:
   deploy:
     name: Pulumi Preview Plan & Apply
     needs:
+      - test
       - build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - run: cd infra/
-      - uses: pulumi/actions@v6
-        with:
-          command: stack select --create ${{ env.PULUMI_STACK_NAME }}
-      - uses: pulumi/actions@v6
-        with:
-          command: preview
-          stack-name: ${{ env.PULUMI_STACK_NAME }}
-      - uses: pulumi/actions@v6
-        with:
-          command: up
-          stack-name: ${{ env.PULUMI_STACK_NAME }}
+    - uses: actions/checkout@v4
+    - run: cd infra/  # Good practice to be in the correct directory
+    - uses: pulumi/actions@v6
+      name: Configure Pulumi
+      with:
+        pulumi-version: latest # Recommend specifying or pinning a version
+        stack-name: ${{ env.PULUMI_STACK_NAME }}
+        upsert: true # This handles stack creation if it doesn't exist
+      env:
+        PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+    - name: Pulumi Preview
+      uses: pulumi/actions@v6
+      with:
+        command: preview
+        stack-name: ${{ env.PULUMI_STACK_NAME }}
+      env:
+        PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+    - name: Pulumi Up
+      if: github.ref == 'refs/heads/main' # Only apply on main branch (or your desired branch)
+      uses: pulumi/actions@v6
+      with:
+        command: up
+        stack-name: ${{ env.PULUMI_STACK_NAME }}
+      env:
+        PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
