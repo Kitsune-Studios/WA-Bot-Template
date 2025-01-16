@@ -1,5 +1,5 @@
-name: kitsune-studio
-description: pulumi IaC for wa-bot
+name: wa-bot-template
+description: A minimal AWS Python Pulumi program
 runtime:
   name: python
   options:
