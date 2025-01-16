@@ -7,6 +7,13 @@ on:
   pull_request:
     branches: [main]
 
+env:
+  PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+  GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  GCP_REGION: ${{ secrets.GCP_REGION }}
+  GCP_BUCKET: ${{ secrets.GCP_BUCKET }}
+  PULUMI_STACK_NAME: kitsune-studios/deployments/dev
+
 jobs:
   build:
     name: Build & Sync Dependencies
@@ -14,6 +21,7 @@ jobs:
     strategy:
       matrix:
         python-version:
+          - "3.11"
           - "3.12"
           # add more python versions here
           # - "3.13"
@@ -42,20 +50,24 @@ jobs:
         uses: astral-sh/setup-uv@v5
       - name: Run the tests
         run: uv run pytest --cov=app
-
-  preview:
-    name: Pulumi Preview
+  
+  
+  deploy:
+    name: Pulumi Preview Plan & Apply
     needs:
       - build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - run: cd infra/
+      - uses: pulumi/actions@v6
+        with:
+          command: stack select --create ${{ env.PULUMI_STACK_NAME }}
       - uses: pulumi/actions@v6
         with:
           command: preview
-          stack-name: kitsune-studios/deployments/dev
-        env:
-          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
-          GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
-          GCP_REGION: ${{ secrets.GCP_REGION }}
-          GCP_BUCKET: ${{ secrets.GCP_BUCKET }}
+          stack-name: ${{ env.PULUMI_STACK_NAME }}
+      - uses: pulumi/actions@v6
+        with:
+          command: up
+          stack-name: ${{ env.PULUMI_STACK_NAME }}

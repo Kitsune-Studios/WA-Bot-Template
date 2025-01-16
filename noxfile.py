@@ -5,7 +5,7 @@ from nox.sessions import Session
 
 PYTHON_VERSION = pathlib.Path(".python-version").read_text().strip()
 python_version = PYTHON_VERSION  # choose the python version you want to use
-python_matrix = ["3.10", "3.11", "3.12", "3.13"]
+python_matrix = ["3.11", "3.12", "3.13"]
 python_matrix = python_version if python_version != "" else python_matrix
 backend = "uv"  # or "venv" or "conda"
 
