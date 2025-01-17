@@ -50,7 +50,7 @@ jobs:
       - name: Sync the dependencies from the pyproject.toml
         run: uv sync --all-extras --dev
       - name: Run the tests
-        run: nox -s tests
+        run: uvx nox -s tests
   
   deploy:
     name: Pulumi Deploy
