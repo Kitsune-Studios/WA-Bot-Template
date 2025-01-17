@@ -1,5 +1,5 @@
-name: wa-bot
-description: WA bot
+name: Kitsune-Studios
+description: WA bot template
 runtime:
   name: python
   options:
