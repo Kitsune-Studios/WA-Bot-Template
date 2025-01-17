@@ -36,17 +36,30 @@ def format(session: Session) -> None:
 
 
 @nox.session(python=python_matrix, venv_backend=backend, reuse_venv=True)
-def test(session: Session) -> None:
+def tests(session: Session) -> None:
     """Run the pytest test suite."""
-    session.run("uv", "")
     session.run("pytest", "--cov", env={"COVERAGE_FILE": ".coverage"})
 
 
 # non-default sessions to run
+@nox.session(python=python_matrix, venv_backend=backend, reuse_venv=True)
+def docker_run(session: nox.Session, docker_name: str) -> None:
+    """Run the project dev environment in docker container."""
+    session.run(
+        "docker",
+        "run",
+        "-p",
+        "8000:8000",
+        "-d",
+        docker_name,
+    )
+
+
 @nox.session(python=python_version, venv_backend=backend, reuse_venv=True)
-def dev(session: nox.Session) -> None:
-    """Run the project dev envirioment."""
-    name = session.posargs[0] if session.posargs else "Lautaro"
-    # check if docker client is installed
-    session.log(f">Hello {name}: docker is not installed")
-    session.log(f">Python version: {PYTHON_VERSION}")
+def docker(session: nox.Session) -> None:
+    """Build & Run the project dev environment in docker container."""
+
+    name = "kitsune-backend"
+
+    session.run("docker", "build", "-t", name, ".")
+    docker_run(session, name)

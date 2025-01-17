@@ -2,10 +2,6 @@ name: CI/CD Pipeline
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
 
 env:
   PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
@@ -16,8 +12,8 @@ env:
   GCP_BUCKET: ${{ secrets.GCP_BUCKET }}
 
 jobs:
-  build:
-    name: Build & Sync Dependencies
+  setup-pipeline:
+    name: Build & Sync Project Dependencies
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -36,25 +32,29 @@ jobs:
       - name: Sync the dependencies from the pyproject.toml
         run: uv sync --all-extras --dev
       - name: Lint code with Ruff
-        run: uvx ruff check --fix --output-format=github --target-version=py312
+        run: uvx ruff check --fix --output-format=github
       - name: Check code formatting with Ruff
-        run: uvx ruff format -q --diff --target-version=py312
-        continue-on-error: true
+        run: uvx ruff format -q --diff
 
   test:
     name: Test Suite
-    needs: build
+    needs: setup-pipeline
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Install uv
         uses: astral-sh/setup-uv@v5
+        with:
+          version: "latest"
+          pyproject-file: "pyproject.toml"
+      - name: Sync the dependencies from the pyproject.toml
+        run: uv sync --all-extras --dev
       - name: Run the tests
-        run: uv run pytest --cov=app
+        run: nox -s tests
   
   deploy:
     name: Pulumi Deploy
-    needs: build
+    needs: test
     runs-on: ubuntu-latest
 
     steps:
@@ -81,9 +81,4 @@ jobs:
           work-dir: infra/
           comment-on-summary: true
           diff: true
-        env:
-          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
-          GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }}
-          GCP_BUCKET: ${{ secrets.GCP_BUCKET }}
-          PULUMI_STACK_NAME: ${{ env.PULUMI_STACK_NAME }}
-          GCP_REGION: ${{ env.GCP_REGION }}
+      
