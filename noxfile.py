@@ -8,15 +8,15 @@ python_version = PYTHON_VERSION  # choose the python version you want to use
 python_matrix = ["3.11", "3.12", "3.13"]
 python_matrix = python_version if python_version != "" else python_matrix
 backend = "uv"  # or "venv" or "conda"
-
+name = "kitsune-backend"
 # nox options
 
 # default sessions when run nox. By default, nox will run all sessions on the list
 nox.options.sessions = [
-    "dev",
     "lint",
     "format",
-    "test",
+    "tests",
+    "docker",
 ]
 
 
@@ -42,12 +42,16 @@ def tests(session: Session) -> None:
 
 
 # non-default sessions to run
+
+
 @nox.session(python=python_matrix, venv_backend=backend, reuse_venv=True)
 def docker_run(session: nox.Session, docker_name: str) -> None:
     """Run the project dev environment in docker container."""
     session.run(
         "docker",
         "run",
+        "--name",
+        name,
         "-p",
         "8000:8000",
         "-d",
@@ -59,7 +63,12 @@ def docker_run(session: nox.Session, docker_name: str) -> None:
 def docker(session: nox.Session) -> None:
     """Build & Run the project dev environment in docker container."""
 
-    name = "kitsune-backend"
-
     session.run("docker", "build", "-t", name, ".")
     docker_run(session, name)
+
+
+@nox.session(python=python_matrix, venv_backend=backend, reuse_venv=True)
+def docker_stop(session: nox.Session, docker_name: str = "") -> None:
+    """Stop the running docker container."""
+    docker_name = name if docker_name == "" else docker_name
+    session.run("docker", "stop", docker_name)
