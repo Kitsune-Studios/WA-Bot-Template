@@ -5,7 +5,6 @@ runtime:
   options:
     toolchain: uv
 config:
-  gcp:project: ${env:GCP_PROJECT_ID}
   pulumi:tags:
     value:
       pulumi:template: gcp-python
