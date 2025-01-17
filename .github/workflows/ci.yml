@@ -59,11 +59,16 @@ jobs:
     steps:
       - name: Checkout to repo
         uses: actions/checkout@v4
-      - name: Install uv
+      - name: Setup uv
         uses: astral-sh/setup-uv@v5
         with:
-          pyproject-file: pyproject.toml
-      - uses: pulumi/actions@v6
+          version: "latest"
+          pyproject-file: "pyproject.toml"
+      - name: Sync uv dependencies
+        run: uv sync --all-extras
+      
+      - name: Pulumi Up
+        uses: pulumi/actions@v6
         with:
           command: up
           stack-name: ${{ env.PULUMI_STACK_NAME }}
