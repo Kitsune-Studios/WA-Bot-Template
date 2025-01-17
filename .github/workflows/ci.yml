@@ -67,7 +67,10 @@ jobs:
           pyproject-file: "pyproject.toml"
       - name: Sync uv dependencies
         run: uv sync --all-extras
-      
+      - name: Setup Cloud Provider [GCP]
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
       - name: Pulumi Up
         uses: pulumi/actions@v6
         with:
