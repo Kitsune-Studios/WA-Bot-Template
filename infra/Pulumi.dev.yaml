@@ -1,4 +1,3 @@
 config:
   gcp:project: ${env:GOOGLE_PROJECT}
-  gcp:credentials: ${env:GCP_SA}
-  
+  gcp:credentials: 
