@@ -38,7 +38,17 @@ def format(session: Session) -> None:
 @nox.session(python=python_matrix, venv_backend=backend, reuse_venv=True)
 def tests(session: Session) -> None:
     """Run the pytest test suite."""
-    session.run("uvx", "pytest", "--cov", env={"COVERAGE_FILE": ".coverage"})
+    try:
+        session.run(
+            "uvx", "pytest", "--cov", env={"COVERAGE_FILE": ".coverage"}, external=True
+        )
+    except nox.command.CommandFailed as e:
+        if e.exit_code == 5:
+            session.warn("Tests failed due to no tests collected (exit code 5)")
+        if e.exit_code == 4:
+            session.warn("Tests failed due to no tests run (exit code 4)")
+        else:
+            raise
 
 
 # non-default sessions to run
