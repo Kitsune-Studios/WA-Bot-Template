@@ -49,8 +49,8 @@ jobs:
           pyproject-file: "pyproject.toml"
       - name: Sync the dependencies from the pyproject.toml
         run: uv sync --all-extras --dev
-      - name: Run the tests
-        run: uvx nox -s tests
+      - name: Run tests with pytest
+        run: uvx pytest tests/ -v
   
   deploy:
     name: Pulumi Deploy

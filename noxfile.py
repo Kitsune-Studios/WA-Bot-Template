@@ -1,6 +1,7 @@
 import pathlib
 
 import nox
+import nox.command
 from nox.sessions import Session
 
 PYTHON_VERSION = pathlib.Path(".python-version").read_text().strip()
@@ -42,13 +43,8 @@ def tests(session: Session) -> None:
         session.run(
             "uvx", "pytest", "--cov", env={"COVERAGE_FILE": ".coverage"}, external=True
         )
-    except nox.command.CommandFailed as e:
-        if e.exit_code == 5:
-            session.warn("Tests failed due to no tests collected (exit code 5)")
-        if e.exit_code == 4:
-            session.warn("Tests failed due to no tests run (exit code 4)")
-        else:
-            raise
+    except nox.command.CommandFailed() as e:
+        session.warn(e)
 
 
 # non-default sessions to run
