@@ -1,3 +1,4 @@
 config:
-  gcp:project: ${env:GCP_PROJECT_ID}
+  gcp:project: ${env:GOOGLE_PROJECT}
+  gcp:credentials: ${env:GCP_SA}
   

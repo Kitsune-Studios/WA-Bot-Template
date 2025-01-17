@@ -9,8 +9,9 @@ on:
 
 env:
   PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
-  GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
-  GCP_REGION: ${{ secrets.GCP_REGION }}
+  GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }}
+  GCP_SA: ${{ secrets.GCP_SA }}
+  GCP_REGION: us-central1
   GCP_BUCKET: ${{ secrets.GCP_BUCKET }}
   PULUMI_STACK_NAME: dev
 
@@ -78,7 +79,7 @@ jobs:
           comment-on-summary: true
         env:
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
-          GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+          GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }}
           GCP_REGION: ${{ secrets.GCP_REGION }}
           GCP_BUCKET: ${{ secrets.GCP_BUCKET }}
           PULUMI_STACK_NAME: ${{ env.PULUMI_STACK_NAME }}

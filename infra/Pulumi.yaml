@@ -5,7 +5,6 @@ runtime:
   options:
     toolchain: uv
 config:
-  gcp:credentials: ${env:GCP_CREDENTIALS_JSON}
   pulumi:tags:
     value:
       pulumi:template: gcp-python
