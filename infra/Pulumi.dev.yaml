@@ -1,2 +1,0 @@
-config:
-  gcp:project: ${env:GCP_PROJECT_ID}
