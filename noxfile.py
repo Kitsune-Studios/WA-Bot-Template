@@ -41,7 +41,7 @@ def tests(session: Session) -> None:
     """Run the pytest test suite."""
     try:
         session.run(
-            "uvx", "pytest", "--cov", env={"COVERAGE_FILE": ".coverage"}, external=True
+            "pytest", "--cov", env={"COVERAGE_FILE": ".coverage"}, external=True
         )
     except nox.command.CommandFailed() as e:
         session.warn(e)
