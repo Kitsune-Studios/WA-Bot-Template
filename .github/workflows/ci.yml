@@ -59,15 +59,14 @@ jobs:
     steps:
       - name: Checkout to repo
         uses: actions/checkout@v4
-
-      - name: Change directory
-        run: cd infra/
-
       - uses: pulumi/actions@v6
         with:
           command: up
           stack-name: ${{ env.PULUMI_STACK_NAME }}
           upsert: true
+          refresh: true
+          work-dir: infra/
+          comment-on-summary: true
         env:
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
           GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
