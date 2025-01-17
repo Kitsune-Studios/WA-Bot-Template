@@ -85,3 +85,13 @@ jobs:
           GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }}
           GCP_BUCKET: ${{ secrets.GCP_BUCKET }}
           PULUMI_STACK_NAME: ${{ env.PULUMI_STACK_NAME }}
+          GCP_REGION: ${{ env.GCP_REGION }}
+
+      - name: Store Updated Stack Output
+        run: pulumi stack output --json > stack-output.json
+
+      - name: Store Stack Output in GCP Bucket
+        uses: google-github-actions/upload-cloud-storage@v2
+        with:
+          path: stack-output.json
+          destination: ${{ secrets.GCP_BUCKET }}
