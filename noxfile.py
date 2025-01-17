@@ -38,7 +38,7 @@ def format(session: Session) -> None:
 @nox.session(python=python_matrix, venv_backend=backend, reuse_venv=True)
 def tests(session: Session) -> None:
     """Run the pytest test suite."""
-    session.run("pytest", "--cov", env={"COVERAGE_FILE": ".coverage"})
+    session.run("uvx", "pytest", "--cov", env={"COVERAGE_FILE": ".coverage"})
 
 
 # non-default sessions to run
