@@ -10,10 +10,10 @@ on:
 env:
   PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
   GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }}
+  PULUMI_STACK_NAME: dev
   GCP_REGION: us-central1
   GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
   GCP_BUCKET: ${{ secrets.GCP_BUCKET }}
-  PULUMI_STACK_NAME: dev
 
 jobs:
   build:
@@ -83,6 +83,5 @@ jobs:
         env:
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
           GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }}
-          GCP_REGION: ${{ secrets.GCP_REGION }}
           GCP_BUCKET: ${{ secrets.GCP_BUCKET }}
           PULUMI_STACK_NAME: ${{ env.PULUMI_STACK_NAME }}
