@@ -1,2 +1,2 @@
 config:
-  gcp:project: ${env:GOOGLE_PROJECT}
+  
