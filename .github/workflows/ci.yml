@@ -12,7 +12,7 @@ env:
   GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
   GCP_REGION: ${{ secrets.GCP_REGION }}
   GCP_BUCKET: ${{ secrets.GCP_BUCKET }}
-  PULUMI_STACK_NAME: kitsune-studios/deployments/dev
+  PULUMI_STACK_NAME: dev
 
 jobs:
   build:
@@ -63,28 +63,14 @@ jobs:
       - name: Change directory
         run: cd infra/
 
-      - name: Configure Pulumi
-        uses: pulumi/actions@v6
-        with:
-          pulumi-version: latest
-          stack-name: ${{ env.PULUMI_STACK_NAME }}
-          upsert: true
-        env:
-          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
-
-      - name: Pulumi Preview
-        uses: pulumi/actions@v6
-        with:
-          command: preview
-          stack-name: ${{ env.PULUMI_STACK_NAME }}
-        env:
-          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
-
-      - name: Pulumi Up
-        if: github.ref == 'refs/heads/main'
-        uses: pulumi/actions@v6
-        with:
-          command: up
-          stack-name: ${{ env.PULUMI_STACK_NAME }}
-        env:
-          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+      - name: Install Pulumi
+        run: curl -fsSL https://get.pulumi.com | sh
+      
+      - name: Login to Pulumi
+        run: pulumi login gcp://$GCP_PROJECT_ID/$GCP_REGION/$PULUMI_STACK_NAME
+      
+      - name: Set Pulumi stack or create if not exists
+        run: pulumi stack select $PULUMI_STACK_NAME || pulumi stack init $PULUMI_STACK_NAME
+      
+      - name: Deploy the infrastructure
+        run: pulumi up --yes
