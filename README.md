@@ -16,7 +16,7 @@ A WhatsApp bot template built with FastAPI and uv package manager, designed to b
 
 ## Requirements
 
-- Python 3.12+
+- Python 3.11+
 - Docker (optional)
 - uv package manager
 
