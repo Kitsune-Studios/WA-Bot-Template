@@ -105,19 +105,8 @@ Install pre-commit hooks on the project:
 pre-commit install # it will add the hooks to the git repository
 ```
 
- >[!NOTE]
- > 1) Pre-commit hooks will run automatically on every commit.
- > 2) To run the hooks manually, use the following command:
-```bash
-pre-commit run --all-files
-```
- >[!TIP]
- > 3) To skip the hooks on a commit, use the following command:
-```bash
-git commit -m "commit message" --no-verify
-```
- 
- > 4) you can check more about pre-commit hooks [here](https://pre-commit.com/). settings can be found in [.pre-commit-config.yaml](./.pre-commit-config.yaml)
+ >[!NOTES]
+ > You can check more about pre-commit hooks [here](https://pre-commit.com/). settings can be found in [.pre-commit-config.yaml](./.pre-commit-config.yaml)
 
 
 #### Nox
