@@ -7,16 +7,16 @@ A WhatsApp bot template built with FastAPI and uv package manager, designed to b
 ## Table of Contents
 
 - [Features](#features)
-
 - [Requirements](#requirements)
-
 - [Dependencies](#dependencies)
-
 - [Quick Start](#quick-start)
-
-- [Development](#development)
-
+  - [Local Development](#local-development)
+    - [Pre-commit](#pre-commit-optional)
+    - [Nox](#nox)
+    - [Ruff](#ruff)
+- [External References](#external-references)
 - [License](#license)
+
 
 
 ## Features
@@ -95,14 +95,14 @@ For development, additional tools are available:
 - Ruff for linting and formatting
 - Nox for automated testing and development tasks
 
-### Pre-commit [Optional]:(it is recommended to install pre-commit hooks if you are contributing to the project)
+#### Pre-commit [Optional]:(it is recommended to install pre-commit hooks if you are contributing to the project)
 
 Install pre-commit hooks: (requires pre-commit to be installed)
 ```bash
 pre-commit install
 ```
 
-### Nox
+#### Nox
 
 Automated testing and development tasks are available using Nox. To run a session, use the following command:
 
