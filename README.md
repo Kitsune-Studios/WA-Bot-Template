@@ -116,6 +116,7 @@ pre-commit run --all-files
 ```bash
 git commit -m "commit message" --no-verify
 ```
+ 
  > 4) you can check more about pre-commit hooks [here](https://pre-commit.com/). settings can be found in [.pre-commit-config.yaml](./.pre-commit-config.yaml)
 
 
