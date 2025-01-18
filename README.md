@@ -11,7 +11,7 @@ A WhatsApp bot template built with FastAPI and uv package manager, designed to b
 - [Dependencies](#dependencies)
 - [Quick Start](#quick-start)
   - [Local Development](#local-development)
-    - [Pre-commit](#pre-commit-optional)
+    - [Pre-commit(optional)](#pre-commit-optional)
     - [Nox](#nox)
     - [Ruff](#ruff)
 - [External References](#external-references)
@@ -61,6 +61,7 @@ curl -fsSL https://deno.land/x/install/install.sh | sh # Linux
 ```
 
 for more information about UV installation and shell autocomplete, please visit this [guide](https://docs.astral.sh/uv/getting-started/installation/).
+
 ### Local Development
 
 1. Clone the repository
@@ -97,7 +98,7 @@ For development, additional tools are available:
 
 #### Pre-commit (Optional)
 
- >[!TIP]
+ >[!IMPORTANT]
  > _it is recommended to install pre-commit hooks if you are contributing to the project_
 
 Install pre-commit hooks on the project:
@@ -105,7 +106,7 @@ Install pre-commit hooks on the project:
 pre-commit install # it will add the hooks to the git repository
 ```
 
- >[!NOTE]
+ >[!TIP]
  > You can check more about pre-commit hooks [here](https://pre-commit.com/). settings can be found in [.pre-commit-config.yaml](./.pre-commit-config.yaml)
 
 
@@ -141,8 +142,16 @@ Project files:
 Documentation:
 - [FastAPI Docs](https://fastapi.tiangolo.com/)
 - [Docker Docs](https://docs.docker.com/)
-- [uv Package Manager](https://github.com/astral-sh/uv)
+- [Astral](https://astral.sh/)
+    - [uv](https://docs.astral.sh/uv/getting-started/installation/)
+    - [ruff](https://docs.astral.sh/ruff/getting-started/installation/)
 - [Mangum](https://github.com/jordaneremieff/mangum)
+- [Pulumi](https://www.pulumi.com/)
+    -[Pulumi AWS](https://www.pulumi.com/docs/reference/clouds/aws/)
+    -[Pulumi GCP](https://www.pulumi.com/docs/reference/clouds/gcp/)
+- [Ngrok](https://ngrok.com/)
+- [Nox](https://nox.thea.codes/)
+
 
 ## License
 
