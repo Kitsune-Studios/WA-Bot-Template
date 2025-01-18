@@ -105,7 +105,7 @@ Install pre-commit hooks on the project:
 pre-commit install # it will add the hooks to the git repository
 ```
 
- >[!NOTES]
+ >[!NOTE]
  > You can check more about pre-commit hooks [here](https://pre-commit.com/). settings can be found in [.pre-commit-config.yaml](./.pre-commit-config.yaml)
 
 
