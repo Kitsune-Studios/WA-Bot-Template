@@ -1,5 +1,6 @@
 from contextlib import asynccontextmanager
 from datetime import datetime
+from os import getenv
 
 import ngrok
 from fastapi import FastAPI, status
@@ -9,15 +10,13 @@ from backend.routers.messages import messages
 
 from .auth import NGROK_AUTH_TOKEN, NGROK_DOMAIN
 
-APPLICATION_PORT = 8000
-
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     print(f"Setting up Ngrok Tunnel on {NGROK_DOMAIN}")
     ngrok.set_auth_token(NGROK_AUTH_TOKEN)
     ngrok.forward(
-        addr=APPLICATION_PORT,
+        addr=getenv("PORT_NUMBER", 8000),
         domain=NGROK_DOMAIN,
     )
     yield

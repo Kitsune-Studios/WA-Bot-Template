@@ -80,12 +80,15 @@ cp .env.example .env
 4. Run the server:
 - Using local development server:
 ```bash
-nox -s local
+nox -s dev # Run the development server
+
 ```
 - Using Docker:
 ```bash
-nox -s docker
+nox -s docker # Build and run the Docker container
 ```
+**Note:** The server will be running on http://localhost:8000 by default on both methods.
+
 For development, additional tools are available:
 - pre-commit for git hooks and code formatting
 - Ruff for linting and formatting
