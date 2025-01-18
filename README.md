@@ -60,31 +60,32 @@ brew install uv # macOS
 curl -fsSL https://deno.land/x/install/install.sh | sh # Linux
 ```
 
-for more information about installation and shell autocomplete, please visit this [guide](https://docs.astral.sh/uv/getting-started/installation/).
+for more information about UV installation and shell autocomplete, please visit this [guide](https://docs.astral.sh/uv/getting-started/installation/).
 ### Local Development
 
 1. Clone the repository
+```bash
+git clone https://github.com/Kitsune-Studios/WA-Bot-Template.git
+```
 2. Install dependencies:
 ```bash
 uv sync
 ```
 3. Set up environment variables
+
+```bash
+cp .env.example .env
+```
+
 4. Run the server:
+- Using local development server:
 ```bash
-uvicorn backend.main:app --reload
+nox -s local
 ```
-
-### Docker Deployment
-
-Build and run using Docker:
-
+- Using Docker:
 ```bash
-docker build -t wa-bot .
-docker run -p 80:80 wa-bot
+nox -s docker
 ```
-
-## Development
-
 For development, additional tools are available:
 - pre-commit for git hooks and code formatting
 - Ruff for linting and formatting
@@ -117,6 +118,20 @@ nox -s format # Format code
 ```bash
 nox -s lint # Lint code
 ```
+## External References
+
+Project files:
+- [Dockerfile](./Dockerfile) - Container configuration
+- [noxfile.py](./noxfile.py) - Development automation
+- [pyproject.toml](./pyproject.toml) - Project dependencies and configuration
+- [.pre-commit-config.yaml](./.pre-commit-config.yaml) - Git hooks configuration
+- [backend/main.py](./backend/main.py) - Main application entry point
+
+Documentation:
+- [FastAPI Docs](https://fastapi.tiangolo.com/)
+- [Docker Docs](https://docs.docker.com/)
+- [uv Package Manager](https://github.com/astral-sh/uv)
+- [Mangum](https://github.com/jordaneremieff/mangum)
 
 ## License
 

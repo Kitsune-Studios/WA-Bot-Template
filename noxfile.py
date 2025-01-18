@@ -78,3 +78,24 @@ def docker_stop(session: nox.Session, docker_name: str = "") -> None:
     """Stop the running docker container."""
     docker_name = name if docker_name == "" else docker_name
     session.run("docker", "stop", docker_name)
+
+
+@nox.session(python=python_matrix, venv_backend=backend, reuse_venv=True)
+def docker_rm(session: nox.Session, docker_name: str = "") -> None:
+    """Remove the docker container."""
+    docker_name = name if docker_name == "" else docker_name
+    session.run("docker", "rm", docker_name)
+
+
+@nox.session(python=python_matrix, venv_backend=backend, reuse_venv=True)
+def docker_rmi(session: nox.Session, docker_name: str = "") -> None:
+    """Remove the docker image."""
+    docker_rm(session, docker_name)
+    docker_name = name if docker_name == "" else docker_name
+    session.run("docker", "rmi", docker_name)
+
+
+@nox.session(python=python_matrix, venv_backend=backend, reuse_venv=True)
+def local(session: nox.Session) -> None:
+    """Run the project dev environment locally."""
+    session.run("uvicorn", "backend.main:app", "--reload")
