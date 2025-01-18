@@ -87,7 +87,8 @@ nox -s dev # Run the development server
 ```bash
 nox -s docker # Build and run the Docker container
 ```
-**Note:** The server will be running on http://localhost:8000 by default on both methods.
+ >[!NOTE]
+ > The server will be running on http://localhost:8000 by default on both methods.
 
 For development, additional tools are available:
 - pre-commit for git hooks and code formatting
