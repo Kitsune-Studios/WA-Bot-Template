@@ -94,9 +94,9 @@ For development, additional tools are available:
 - Ruff for linting and formatting
 - Nox for automated testing and development tasks
 
-### Pre-commit
+### Pre-commit [Optional]:(it is recommended to install pre-commit hooks if you are contributing to the project)
 
-Install pre-commit hooks:
+Install pre-commit hooks: (requires pre-commit to be installed)
 ```bash
 pre-commit install
 ```
