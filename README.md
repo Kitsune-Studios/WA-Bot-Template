@@ -72,16 +72,36 @@ docker run -p 80:80 wa-bot
 ## Development
 
 For development, additional tools are available:
+- pre-commit for git hooks and code formatting
 - Ruff for linting and formatting
 - Nox for automated testing and development tasks
 
-Run development tasks with nox:
-```bash
-# Run all default sessions (format, lint, test)
-nox
+### Pre-commit
 
-# Run specific session
-nox -s test
+Install pre-commit hooks:
+```bash
+pre-commit install
+```
+
+### Nox
+
+Automated testing and development tasks are available using Nox. To run a session, use the following command:
+
+```bash
+nox -s [name] # Run specific session. e.g. nox -s format
+```
+
+#### Ruff
+
+ruff is a tool for linting and formatting code. It is used in the `format` & `lint` session in Nox.
+>to run the session, use the following command:
+
+```bash
+nox -s format # Format code
+```
+
+```bash
+nox -s lint # Lint code
 ```
 
 ## License
