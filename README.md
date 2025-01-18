@@ -62,8 +62,6 @@ curl -fsSL https://deno.land/x/install/install.sh | sh # Linux
 
 for more information about UV installation and shell autocomplete, please visit this [guide](https://docs.astral.sh/uv/getting-started/installation/).
 
-### Local Development
-
 1. Clone the repository
 ```bash
 git clone https://github.com/Kitsune-Studios/WA-Bot-Template.git
@@ -77,8 +75,14 @@ uv sync
 ```bash
 cp .env.example .env
 ```
+4. Quick start
+```bash
+uv run quickstart
+```
 
-4. Run the server:
+### Local Development
+
+5. Run the server:
 - Using local development server:
 ```bash
 nox -s dev # Run the development server
@@ -91,9 +95,9 @@ nox -s docker # Build and run the Docker container
  >[!NOTE]
  > The server will be running on http://localhost:8000 by default on both methods.
 
-For development, additional tools are available:
-- pre-commit for git hooks and code formatting
-- Ruff for linting and formatting
+*For development, additional tools are available:*
+- pre-commit for git hooks and code formatting (optional)
+- Ruff for linting and formatting code
 - Nox for automated testing and development tasks
 
 #### Pre-commit (Optional)

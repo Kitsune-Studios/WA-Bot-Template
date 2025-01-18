@@ -1,3 +1,10 @@
+# /// script
+# requires-python = ">=3.11"
+# dependencies = [
+#     "python-dotenv",
+#     "nox",
+# ]
+# ///
 import pathlib
 from os import getenv
 
