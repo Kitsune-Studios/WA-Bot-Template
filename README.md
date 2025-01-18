@@ -98,7 +98,7 @@ For development, additional tools are available:
 #### Pre-commit (Optional)
 
  >[!TIP]
-    >_it is recommended to install pre-commit hooks if you are contributing to the project_
+ > _it is recommended to install pre-commit hooks if you are contributing to the project_
 
 Install pre-commit hooks: (requires pre-commit to be installed)
 ```bash
