@@ -2,8 +2,22 @@
 
 [![CI/CD Pipeline](https://github.com/Kitsune-Studios/WA-Bot-Template/actions/workflows/ci.yml/badge.svg)](https://github.com/Kitsune-Studios/WA-Bot-Template/actions/workflows/ci.yml)
 
-
 A WhatsApp bot template built with FastAPI and uv package manager, designed to be deployed with Docker.
+
+## Table of Contents
+
+- [Features](#features)
+
+- [Requirements](#requirements)
+
+- [Dependencies](#dependencies)
+
+- [Quick Start](#quick-start)
+
+- [Development](#development)
+
+- [License](#license)
+
 
 ## Features
 
