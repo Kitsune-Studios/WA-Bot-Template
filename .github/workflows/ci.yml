@@ -10,15 +10,17 @@ env:
   GCP_REGION: us-central1
   GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
   GCP_BUCKET: ${{ secrets.GCP_BUCKET }}
-  
+
+
 jobs:
   build:
     name: Build & Sync Project Dependencies
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: &python_versions
+        python-version:
           - "3.11"
+          - "3.12"
 
     steps:
       - uses: actions/checkout@v4
@@ -44,6 +46,7 @@ jobs:
       matrix:
         python-version: 
           - "3.11"
+          - "3.12"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
