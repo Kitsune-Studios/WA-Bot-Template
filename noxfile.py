@@ -35,7 +35,7 @@ name = pathlib.Path().name  # get the project name from the current directory
 nox.options.sessions = [
     "linter",  #  to run linter
     "fmt",  #  to run formatter
-    "run_tests",  # to run tests
+    "tests",  # to run tests
     # "docker",  # to build & run docker container
     # "setup_pre_commit",  # to setup pre-commit hooks
     # "dev",  # to run the project locally
@@ -67,7 +67,7 @@ def fmt(session: Session) -> None:
 
 
 @nox.session(python=python_matrix, venv_backend=BACKEND, reuse_venv=KEEP_VENV)
-def run_tests(session: Session) -> None:
+def tests(session: Session) -> None:
     """Run the pytest test suite."""
     try:
         session.run(
