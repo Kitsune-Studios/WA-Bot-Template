@@ -105,7 +105,7 @@ def docker_run(session: nox.Session, docker_name: str) -> None:
 def docker(session: nox.Session) -> None:
     """Build & Run the project dev environment in docker container."""
     session.log("Building the docker image: %s", name)
-    session.run("docker", "build", "-t", name, ".")
+    session.run("docker", "build", "-t", name, ".", external=EXTERNAL)
     docker_run(session, name)
 
 
@@ -114,7 +114,7 @@ def docker_stop(session: nox.Session, docker_name: str = "") -> None:
     """Stop the running docker container."""
     session.log("Stopping the docker container: %s", docker_name)
     docker_name = name if docker_name == "" else docker_name
-    session.run("docker", "stop", docker_name)
+    session.run("docker", "stop", docker_name, external=EXTERNAL)
 
 
 @nox.session(python=python_matrix, venv_backend=BACKEND, reuse_venv=KEEP_VENV)
@@ -122,7 +122,7 @@ def docker_start(session: nox.Session, docker_name: str = "") -> None:
     """Start the stopped docker container."""
     docker_name = name if docker_name == "" else docker_name
     session.log("Starting the docker container: %s", docker_name)
-    session.run("docker", "start", docker_name)
+    session.run("docker", "start", docker_name, external=EXTERNAL)
 
 
 @nox.session(python=python_matrix, venv_backend=BACKEND, reuse_venv=KEEP_VENV)
@@ -132,7 +132,7 @@ def docker_rm(session: nox.Session, docker_name: str = "") -> None:
     session.log("Stopping the docker container if any: %s", docker_name)
     docker_stop(session, docker_name)
     session.log("Removing the docker container: %s", docker_name)
-    session.run("docker", "rm", docker_name)
+    session.run("docker", "rm", docker_name, external=EXTERNAL)
 
 
 @nox.session(python=python_matrix, venv_backend=BACKEND, reuse_venv=KEEP_VENV)
@@ -142,18 +142,18 @@ def docker_rmi(session: nox.Session, docker_name: str = "") -> None:
     docker_rm(session, docker_name)
     session.log("Removing the docker image: %s", docker_name)
     docker_name = name if docker_name == "" else docker_name
-    session.run("docker", "rmi", docker_name)
+    session.run("docker", "rmi", docker_name, external=EXTERNAL)
 
 
 @nox.session(python=python_matrix, venv_backend=BACKEND, reuse_venv=KEEP_VENV)
 def dev(session: nox.Session) -> None:
     """Run the project dev environment locally."""
     session.run("uv", "sync", "--all-groups")
-    session.run("uv", "run", "./main.py")
+    session.run("uv", "run", "./main.py", external=EXTERNAL)
 
 
 @nox.session(python=python_matrix, venv_backend=BACKEND, reuse_venv=KEEP_VENV)
 def setup_pre_commit(session: nox.Session) -> None:
     """Set up pre-commit hooks."""
-    session.run("pre-commit", "install")
-    session.run("pre-commit", "install", "-t", "pre-push")
+    session.run("pre-commit", "install", external=EXTERNAL)
+    session.run("pre-commit", "install", "-t", "pre-push", external=EXTERNAL)
