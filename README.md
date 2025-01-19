@@ -119,7 +119,7 @@ pre-commit install --install-hooks # it will add the hooks to the git repository
 Automated testing and development tasks are available using Nox. To run a session, use the following command:
 
 ```bash
-nox -s [name] # Run specific session. e.g. nox -s format
+nox -s [name] # Run specific session. e.g. nox -s fmt
 ```
 
 #### Ruff
@@ -128,7 +128,7 @@ ruff is a tool for linting and formatting code. It is used in the `format` & `li
 >to run the session, use the following command:
 
 ```bash
-nox -s format # Format code
+nox -s fmt # Format code
 ```
 
 ```bash
