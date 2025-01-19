@@ -69,7 +69,7 @@ indent-width = 4
 [tool.ruff.lint]
 # select = ["E4", "E7", "E9", "F", "W", "C", "D", "I", "R", "T", "B", "C", "E", "F", "I", "N", "R", "T", "W"] 
 select =["ALL"]
-ignore = ["S"]
+ignore = ["S","D104"]
 fixable = ["ALL"]
 unfixable = []
 

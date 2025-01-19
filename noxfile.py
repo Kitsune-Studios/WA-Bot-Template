@@ -16,6 +16,7 @@ from dotenv import load_dotenv
 from nox.sessions import Session
 
 load_dotenv()
+EXTERNAL = getenv("EXTERNAL", "True") == "True"
 KEEP_VENV = getenv("KEEP_VENV", "True") == "True"
 PORT_NUMBER = int(getenv("PORT_NUMBER", "8000"))
 PYTHON_VERSION = (
@@ -32,6 +33,7 @@ BACKEND = "uv"  # or "venv" or "conda"
 name = pathlib.Path().name  # get the project name from the current directory
 
 # Nox sessions to run by default
+
 nox.options.sessions = [
     "lint",  #  to run linter
     "fmt",  #  to run formatter
@@ -74,7 +76,7 @@ def tests(session: Session) -> None:
             "pytest",
             "--cov",
             env={"COVERAGE_FILE": ".coverage"},
-            external=True,
+            external=EXTERNAL,
             success_codes=[0, 5],
         )
     finally:
