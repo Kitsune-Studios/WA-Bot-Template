@@ -6,10 +6,8 @@ import pulumi
 from dotenv import load_dotenv
 from pulumi import Config
 from pulumi_gcp import cloudrun, storage
-from pulumi_gcp.config import project as gcp_project
 
 config = Config()
-project = gcp_project.get()
 load_dotenv()
 bucket_name = getenv("GCP_BUCKET", "kitsune-bucket")
 # Create a GCP resource (Storage Bucket)
