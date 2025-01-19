@@ -91,7 +91,7 @@ nox -s docker # Build and run the Docker container
  >[!NOTE]
  > The server will be running on http://localhost:8000 by default on both methods.
 
-*For development, additional tools are available:*
+***For development, additional tools are available:***
 - pre-commit for git hooks and code formatting (optional)
 - Ruff for linting and formatting code
 - Nox for automated testing and development tasks
