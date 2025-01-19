@@ -37,8 +37,8 @@ nox.options.sessions = [
     # "fmt",  #  to run formatter
     # "run_tests",  # to run tests
 ]
-pyproject = nox.project.load_toml("pyproject.toml")
-pyproject
+# pyproject = nox.project.load_toml("pyproject.toml")
+
 # Nox automation to run the project using uv
 
 
