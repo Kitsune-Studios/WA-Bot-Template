@@ -16,7 +16,7 @@ from dotenv import load_dotenv
 from nox.sessions import Session
 
 load_dotenv()
-
+KEEP_VENV = getenv("KEEP_VENV", "True") == "True"
 PORT_NUMBER = int(getenv("PORT_NUMBER", "8000"))
 PYTHON_VERSION = (
     pathlib.Path(".python-version").read_text().strip()
@@ -31,13 +31,16 @@ BACKEND = "uv"  # or "venv" or "conda"
 
 name = pathlib.Path().name  # get the project name from the current directory
 
-# Nox params
+# Nox sessions to run by default
 nox.options.sessions = [
     "lint",  #  to run linter
-    # "fmt",  #  to run formatter
-    # "run_tests",  # to run tests
+    "fmt",  #  to run formatter
+    "run_tests",  # to run tests
+    "docker",  # to build & run docker container
+    "setup_pre_commit",  # to setup pre-commit hooks
+    "dev",  # to run the project locally
 ]
-# pyproject = nox.project.load_toml("pyproject.toml")
+# pyproject = nox.project.load_toml("pyproject.toml")  # noqa: ERA001
 
 # Nox automation to run the project using uv
 
@@ -54,7 +57,7 @@ def fmt(session: Session) -> None:
     session.run("uvx", "ruff", "format", "--target-version=py312")
 
 
-@nox.session(python=python_matrix, venv_backend=BACKEND, reuse_venv=True)
+@nox.session(python=python_matrix, venv_backend=BACKEND, reuse_venv=KEEP_VENV)
 def run_tests(session: Session) -> None:
     """Run the pytest test suite."""
     try:
@@ -71,7 +74,7 @@ def run_tests(session: Session) -> None:
 # non-default sessions to run
 
 
-@nox.session(python=python_matrix, venv_backend=BACKEND, reuse_venv=True)
+@nox.session(python=python_matrix, venv_backend=BACKEND, reuse_venv=KEEP_VENV)
 def docker_run(session: nox.Session, docker_name: str) -> None:
     """Run the project dev environment in docker container."""
     session.run(
@@ -86,7 +89,7 @@ def docker_run(session: nox.Session, docker_name: str) -> None:
     )
 
 
-@nox.session(python=python_version, venv_backend=BACKEND, reuse_venv=True)
+@nox.session(python=python_version, venv_backend=BACKEND, reuse_venv=KEEP_VENV)
 def docker(session: nox.Session) -> None:
     """Build & Run the project dev environment in docker container."""
     session.log("Building the docker image: %s", name)
@@ -94,7 +97,7 @@ def docker(session: nox.Session) -> None:
     docker_run(session, name)
 
 
-@nox.session(python=python_matrix, venv_backend=BACKEND, reuse_venv=True)
+@nox.session(python=python_matrix, venv_backend=BACKEND, reuse_venv=KEEP_VENV)
 def docker_stop(session: nox.Session, docker_name: str = "") -> None:
     """Stop the running docker container."""
     session.log("Stopping the docker container: %s", docker_name)
@@ -102,7 +105,7 @@ def docker_stop(session: nox.Session, docker_name: str = "") -> None:
     session.run("docker", "stop", docker_name)
 
 
-@nox.session(python=python_matrix, venv_backend=BACKEND, reuse_venv=True)
+@nox.session(python=python_matrix, venv_backend=BACKEND, reuse_venv=KEEP_VENV)
 def docker_start(session: nox.Session, docker_name: str = "") -> None:
     """Start the stopped docker container."""
     docker_name = name if docker_name == "" else docker_name
@@ -110,7 +113,7 @@ def docker_start(session: nox.Session, docker_name: str = "") -> None:
     session.run("docker", "start", docker_name)
 
 
-@nox.session(python=python_matrix, venv_backend=BACKEND, reuse_venv=True)
+@nox.session(python=python_matrix, venv_backend=BACKEND, reuse_venv=KEEP_VENV)
 def docker_rm(session: nox.Session, docker_name: str = "") -> None:
     """Remove the docker container."""
     docker_name = name if docker_name == "" else docker_name
@@ -120,7 +123,7 @@ def docker_rm(session: nox.Session, docker_name: str = "") -> None:
     session.run("docker", "rm", docker_name)
 
 
-@nox.session(python=python_matrix, venv_backend=BACKEND, reuse_venv=True)
+@nox.session(python=python_matrix, venv_backend=BACKEND, reuse_venv=KEEP_VENV)
 def docker_rmi(session: nox.Session, docker_name: str = "") -> None:
     """Remove the docker image."""
     session.log("Removing the docker container if any: %s", docker_name)
@@ -130,7 +133,15 @@ def docker_rmi(session: nox.Session, docker_name: str = "") -> None:
     session.run("docker", "rmi", docker_name)
 
 
-@nox.session(python=python_matrix, venv_backend=BACKEND, reuse_venv=True)
+@nox.session(python=python_matrix, venv_backend=BACKEND, reuse_venv=KEEP_VENV)
 def dev(session: nox.Session) -> None:
     """Run the project dev environment locally."""
+    session.run("uv", "sync", "--all-groups")
     session.run("uv", "run", "./main.py")
+
+
+@nox.session(python=python_matrix, venv_backend=BACKEND, reuse_venv=KEEP_VENV)
+def setup_pre_commit(session: nox.Session) -> None:
+    """Set up pre-commit hooks."""
+    session.run("pre-commit", "install")
+    session.run("pre-commit", "install", "-t", "pre-push")
