@@ -68,7 +68,7 @@ git clone https://github.com/Kitsune-Studios/WA-Bot-Template.git && cd $_ # Clon
 ```
 2. Install dependencies:
 ```bash
-uv sync # Install dependencies using uv
+uv sync --all-groups --dev # Install dependencies using uv
 ```
 3. Set up environment variables
 
