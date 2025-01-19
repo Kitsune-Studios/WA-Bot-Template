@@ -107,7 +107,7 @@ nox -s docker # Build and run the Docker container
 
 Install pre-commit hooks on the project:
 ```bash
-pre-commit install # it will add the hooks to the git repository
+pre-commit install --install-hooks # it will add the hooks to the git repository
 ```
 
  >[!TIP]
