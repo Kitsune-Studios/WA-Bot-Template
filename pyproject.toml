@@ -42,6 +42,7 @@ dev = [
     "nox>=2024.10.9",
     "pytest>=8.3.4",
     "pytest-cov>=6.0.0",
+    "commitizen>=4.1.0",
 ]
 
 # [build-system]
@@ -51,11 +52,12 @@ dev = [
 # Tool configuration
 [tool.ruff]
 target-version = "py311"
-line-length = 80
-select = ["E", "F", "B", "I", "N", "UP", "PL", "RUF"]
-ignore = []
-
+line-length = 88
+indent-width = 4
 [tool.ruff.lint]
+# select = ["E4", "E7", "E9", "F"]
+select =["ALL"]
+ignore = []
 fixable = ["ALL"]
 unfixable = []
 
@@ -81,6 +83,7 @@ managed = true
 
 [dependency-groups]
 dev = [
+    "commitizen>=4.1.0",
     "nox>=2024.10.9",
     "pytest>=8.3.4",
 ]
