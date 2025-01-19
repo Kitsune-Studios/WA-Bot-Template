@@ -1,9 +1,11 @@
+# This file is used to configure the project and its dependencies
+# For more information about this pyproject.toml, see UV documentation: https://github.com/astral-sh/uv/blob/main/docs/reference/settings.md
 [project]
 name = "wa-bot-template"
 version = "0.1.1"
 description = "Template for WA bot using FastAPI and uv"
 readme = "README.md"
-license = { text = "MIT" }
+license-files = ["LICENSE"]
 requires-python = ">=3.11"
 authors = [
     { name = "Lautaro Pacella", email = "lautaropacella@hotmail.com" },
@@ -38,10 +40,24 @@ dependencies = [
 [dependency-groups]
 dev = [
     "nox>=2024.10.9",
+    "poethepoet>=0.32.1",
     "pytest>=8.3.4",
     "pytest-cov>=6.0.0",
 ]
 
+[project.optional-dependencies]
+
+
+# UV configuration
+[tool.uv]
+preview = true
+default-groups = ["dev"]
+required-version = ">=0.5.21"
+upgrade = true
+# managed = false # Uncomment this line to disable the managed mode
+
+
+# Hatchling configuration
 # [build-system]
 # requires = ["hatchling"]
 # build-backend = "hatchling.build"
@@ -64,20 +80,14 @@ indent-style = "space"
 skip-magic-trailing-comma = false
 line-ending = "auto"
 
-# Nox configuration
+# Pytest configuration
 [tool.pytest.ini_options]
 minversion = "8.0"
 addopts = "-ra -q --cov"
 testpaths = ["tests"]
 
+# Coverage configuration
 [tool.coverage.run]
 source = ["backend"]
 omit = ["tests/*"]
-
-
-[tool.uv]
-preview = true
-default-groups = ["dev"]
-managed = true
-
 
