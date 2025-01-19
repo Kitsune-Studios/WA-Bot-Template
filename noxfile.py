@@ -33,7 +33,7 @@ name = pathlib.Path().name  # get the project name from the current directory
 
 # Nox sessions to run by default
 nox.options.sessions = [
-    "lint",  #  to run linter
+    "linter",  #  to run linter
     "fmt",  #  to run formatter
     "run_tests",  # to run tests
     "docker",  # to build & run docker container
@@ -46,15 +46,24 @@ nox.options.sessions = [
 
 
 @nox.session(python=python_matrix, venv_backend=BACKEND)
-def lint(session: Session) -> None:
+def linter(session: Session) -> None:
     """Run ruff linter."""
-    session.run("uvx", "ruff", "check", "--fix", "--unsafe-fixes", ".")
+    session.run(
+        "uvx",
+        "ruff",
+        "check",
+        "--fix",
+        "--unsafe-fixes",
+        "--output-format=github",
+        "--target-version=py311",
+        ".",
+    )
 
 
 @nox.session(python=python_matrix, venv_backend=BACKEND)
 def fmt(session: Session) -> None:
     """Run ruff formatter."""
-    session.run("uvx", "ruff", "format", "--target-version=py312")
+    session.run("uvx", "ruff", "format", "--target-version=py311")
 
 
 @nox.session(python=python_matrix, venv_backend=BACKEND, reuse_venv=KEEP_VENV)
