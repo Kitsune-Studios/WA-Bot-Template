@@ -1,4 +1,4 @@
-"""A Google Cloud Python Pulumi program"""
+"""A Google Cloud Python Pulumi program."""
 
 from os import getenv
 
@@ -27,7 +27,7 @@ cloud_run = cloudrun.Service(
                     resources=cloudrun.ServiceTemplateSpecContainerResourcesArgs(
                         limits={"cpu": "1", "memory": "512Mb"},
                     ),
-                )
+                ),
             ],
         ),
     ),
@@ -35,4 +35,3 @@ cloud_run = cloudrun.Service(
 
 # Export the DNS name of the bucket
 pulumi.export(bucket_name, bucket.url)
-# pulumi.export("cloud_run_url", cloud_run.statuses[0].url)

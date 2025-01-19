@@ -42,7 +42,7 @@ name = (
 # default sessions when run nox without specifying any session
 nox.options.sessions = [
     "lint",  #  to run linter
-    "format",  #  to run formatter
+    "fmt",  #  to run formatter
     # "run_tests",  # to run tests
 ]
 
@@ -53,11 +53,11 @@ nox.options.sessions = [
 @nox.session(python=python_matrix, venv_backend=backend)
 def lint(session: Session) -> None:
     """Run ruff linter."""
-    session.run("uvx", "ruff", "check", ".")
+    session.run("uvx", "ruff", "check", "--fix", "--unsafe-fixes", ".")
 
 
 @nox.session(python=python_matrix, venv_backend=backend)
-def format(session: Session) -> None:
+def fmt(session: Session) -> None:
     """Run ruff formatter."""
     session.run("uvx", "ruff", "format", "--target-version=py312")
 
