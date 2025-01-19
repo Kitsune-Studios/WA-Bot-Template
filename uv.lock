@@ -1297,7 +1297,6 @@ dev = [
 
 [package.dev-dependencies]
 dev = [
-    { name = "commitizen" },
     { name = "nox" },
     { name = "pytest" },
 ]
@@ -1325,7 +1324,6 @@ requires-dist = [
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "commitizen", specifier = ">=4.1.0" },
     { name = "nox", specifier = ">=2024.10.9" },
     { name = "pytest", specifier = ">=8.3.4" },
 ]
