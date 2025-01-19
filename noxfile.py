@@ -5,6 +5,8 @@
 #     "nox",
 # ]
 # ///
+"""Main nox automation script."""
+
 import pathlib
 from os import getenv
 
@@ -15,11 +17,11 @@ from nox.sessions import Session
 
 load_dotenv()
 
-PORT_NUMBER = getenv("PORT_NUMBER", 8000)
+PORT_NUMBER = int(getenv("PORT_NUMBER", "8000"))
 PYTHON_VERSION = (
     pathlib.Path(".python-version").read_text().strip()
 )  # read python version from .python-version file
-python_version = PYTHON_VERSION  # choose the python version you want to use, default is from .python-version file
+python_version = PYTHON_VERSION
 
 python_matrix = ["3.11", "3.12", "3.13"] if python_version == "" else python_version
 
@@ -65,7 +67,10 @@ def run_tests(session: Session) -> None:
     """Run the pytest test suite."""
     try:
         session.run(
-            "pytest", "--cov", env={"COVERAGE_FILE": ".coverage"}, external=True
+            "pytest",
+            "--cov",
+            env={"COVERAGE_FILE": ".coverage"},
+            external=True,
         )
     except nox.command.CommandFailed(Exception) as e:
         session.warn(e)

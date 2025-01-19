@@ -64,20 +64,20 @@ for more information about UV installation and shell autocomplete, please visit 
 
 1. Clone the repository
 ```bash
-git clone https://github.com/Kitsune-Studios/WA-Bot-Template.git
+git clone https://github.com/Kitsune-Studios/WA-Bot-Template.git && cd $_ # Clone the repository and change directory
 ```
 2. Install dependencies:
 ```bash
-uv sync
+uv sync # Install dependencies using uv
 ```
 3. Set up environment variables
 
 ```bash
-cp .env.example .env
+cp .env.example .env # Copy the example environment file. Edit the .env file with your credentials
 ```
 4. Quick start
 ```bash
-uv run quickstart
+uv run quickstart # Run the quickstart script
 ```
 
 ### Local Development

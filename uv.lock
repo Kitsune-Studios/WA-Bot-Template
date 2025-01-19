@@ -1089,30 +1089,6 @@ wheels = [
 ]
 
 [[package]]
-name = "uv"
-version = "0.5.19"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/bc/26/e5310b535dfcb7e803fefae7b5ad8dd4219014fc3ee61a0cdb29bb1dc671/uv-0.5.19.tar.gz", hash = "sha256:650445f8e0a5ef41a4d88d7b8e45cf48a66ca124c96da337b5fd1ddeceee45c6", size = 2626775 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/fc/b8/4559ab8267e628fc120017b8eaa1a203387455fb03834a2bc85d384f2db2/uv-0.5.19-py3-none-linux_armv6l.whl", hash = "sha256:d13c74ffd6fa89754deabd9e930a5c5b0dfd76695c0067ab4c056d48099ed77f", size = 15156347 },
-    { url = "https://files.pythonhosted.org/packages/ca/22/34091cc693d6ecc87e79d29a91db7aa3c4667a002ecaea26562ce4a61f81/uv-0.5.19-py3-none-macosx_10_12_x86_64.whl", hash = "sha256:cc4646f86679706ae78f81090a6be5dd94d05c9a802569d39f5024aa3f01c8c1", size = 15260699 },
-    { url = "https://files.pythonhosted.org/packages/44/d0/2907e3b05b1ff12b52039b4f5ee148ad516ed8754da40282990c4f94aedc/uv-0.5.19-py3-none-macosx_11_0_arm64.whl", hash = "sha256:3207323e95ae093ec750d302ce293d03178f60d7a3f50881b9d52e83a406621b", size = 14200589 },
-    { url = "https://files.pythonhosted.org/packages/6b/b4/15984420a49886c468eb8736366fa7cf0f1427de087fe50203274d9df519/uv-0.5.19-py3-none-manylinux_2_17_aarch64.manylinux2014_aarch64.musllinux_1_1_aarch64.whl", hash = "sha256:cde93f1596f0246598c630dafbbb84fd77912ce013f3a84df2e502cbd53d3991", size = 14652368 },
-    { url = "https://files.pythonhosted.org/packages/64/df/dd7a269e0948ef1b4e7b6b8aa2b7b9e381c504c0f36813976090521092c2/uv-0.5.19-py3-none-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:937680b0bbd7809441d1316311df31628f0c4e8ef7dd91a81a058f84585d9795", size = 14910098 },
-    { url = "https://files.pythonhosted.org/packages/32/1b/26ada24b8465365790b8624de8a081863af166cc8e10ece747a6d1ea1482/uv-0.5.19-py3-none-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:38e34a726cedfa8ca9d016ef7de8796d967b1853d3846a9864f031edcbc17676", size = 15605247 },
-    { url = "https://files.pythonhosted.org/packages/8e/7f/a84335e315c9905fa1964f7214f2b880441a65b9022717f6baf527b178b9/uv-0.5.19-py3-none-manylinux_2_17_ppc64.manylinux2014_ppc64.whl", hash = "sha256:d74dc36f9c11a5bc5aca02f598da0e4e231f0d19f92d1917a994195ad5ee188e", size = 16521390 },
-    { url = "https://files.pythonhosted.org/packages/ee/11/6a06f57955f64efa56b8797c3f147a2634a0c2c5695047695ed65ddc415b/uv-0.5.19-py3-none-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:75dedcb2400e12cf9d64a7f8734ad57ef62ccf8102ff560a4404102d003dfa0c", size = 16294539 },
-    { url = "https://files.pythonhosted.org/packages/64/f5/2e42a3259f1b32bd25a2534c4d705554bb9729a1645e7d51b93157af3a34/uv-0.5.19-py3-none-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:35e23e9c0cd34458ab8eb84ec517778218f9a6c3952e62dad6dcaac95f45b49f", size = 20557966 },
-    { url = "https://files.pythonhosted.org/packages/fc/77/a77b1e533b71f7e7e0f47e3b5a0b86860cd942058f3b71e6fd32faac0417/uv-0.5.19-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:30b8af69f06816a4600de8f84f7645c03457fa594beb86030d335a8d2bcfdc56", size = 15953984 },
-    { url = "https://files.pythonhosted.org/packages/f9/f8/2e012635bf5be2ec6479a76b867f38be3cc2a9a4d47d8daea1ba3c9e4f06/uv-0.5.19-py3-none-manylinux_2_28_aarch64.whl", hash = "sha256:80981dc03e60f59ffbfb446d50403500ef7d6199b27cd7d114c7fd54bdf21aa4", size = 14918573 },
-    { url = "https://files.pythonhosted.org/packages/a2/21/df8b4870f3ade6d14037ea9399c3dcbdf32beae719f62ec095237e45f4e2/uv-0.5.19-py3-none-musllinux_1_1_armv7l.whl", hash = "sha256:38a802d60e9baa4c90eeb8432e2f364f343d7624d90cfb41e402584bffdd4965", size = 14877012 },
-    { url = "https://files.pythonhosted.org/packages/16/39/7ea63e5e8d7ba99a00129f20c3afe15ee487c0fcd7a5838546983cfaca2b/uv-0.5.19-py3-none-musllinux_1_1_i686.whl", hash = "sha256:ec767e0ce224002da12b9ce72a8cc1f94c6364f464207d6202ff940ac5849381", size = 15261227 },
-    { url = "https://files.pythonhosted.org/packages/e7/55/3ff76e7ea53f1c685528f29d671354fd60aec5e78dcc3e32584ab740274f/uv-0.5.19-py3-none-musllinux_1_1_x86_64.whl", hash = "sha256:ae855896b170f3e44ad8f0c1866c5fbb3a341c9a254b1741591bd3abc4f8c742", size = 16050764 },
-    { url = "https://files.pythonhosted.org/packages/ef/3c/df5085f658384cd720b1fbfe4bdf7324884c3b1482c9389f3870c3d149c4/uv-0.5.19-py3-none-win32.whl", hash = "sha256:c5bc2aacff12a1728affeafeefe7bf88cf7d99872b4200ddab4599c90ff7bedd", size = 15187577 },
-    { url = "https://files.pythonhosted.org/packages/36/c6/830d2cab8976a86512503277239283487bd4136f716eb635e52b30759cae/uv-0.5.19-py3-none-win_amd64.whl", hash = "sha256:b4da02e5431692d5138b8184d1cb9ee783538b856f7a6ec2c5b7027ab998a176", size = 16553318 },
-]
-
-[[package]]
 name = "uvicorn"
 version = "0.34.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1190,11 +1166,10 @@ dependencies = [
     { name = "pulumi-gcp" },
     { name = "pulumi-random" },
     { name = "requests" },
-    { name = "uv" },
     { name = "uvicorn" },
 ]
 
-[package.dev-dependencies]
+[package.optional-dependencies]
 dev = [
     { name = "darglint" },
     { name = "isort" },
@@ -1203,28 +1178,35 @@ dev = [
     { name = "pytest-cov" },
 ]
 
+[package.dev-dependencies]
+dev = [
+    { name = "nox" },
+    { name = "pytest" },
+]
+
 [package.metadata]
 requires-dist = [
     { name = "boto3", specifier = ">=1.35.94" },
+    { name = "darglint", marker = "extra == 'dev'", specifier = ">=1.8.1" },
     { name = "fastapi", extras = ["standard"], specifier = ">=0.115.6" },
+    { name = "isort", marker = "extra == 'dev'", specifier = ">=5.13.2" },
     { name = "mangum", specifier = ">=0.19.0" },
     { name = "ngrok", specifier = ">=1.4.0" },
+    { name = "nox", marker = "extra == 'dev'", specifier = ">=2024.10.9" },
     { name = "pulumi-docker", specifier = ">=4.6.1" },
     { name = "pulumi-esc-sdk", specifier = ">=0.11.0" },
     { name = "pulumi-gcp", specifier = ">=8.14.0" },
     { name = "pulumi-random", specifier = ">=4.16.8" },
+    { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.3.4" },
+    { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=6.0.0" },
     { name = "requests", specifier = ">=2.32.3" },
-    { name = "uv", specifier = ">=0.5.19" },
     { name = "uvicorn", specifier = ">=0.34.0" },
 ]
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "darglint", specifier = ">=1.8.1" },
-    { name = "isort", specifier = ">=5.13.2" },
     { name = "nox", specifier = ">=2024.10.9" },
     { name = "pytest", specifier = ">=8.3.4" },
-    { name = "pytest-cov", specifier = ">=6.0.0" },
 ]
 
 [[package]]
