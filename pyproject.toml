@@ -55,7 +55,6 @@ select = ["E", "F", "B", "I", "N", "UP", "PL", "RUF"]
 ignore = []
 
 [tool.ruff.lint]
-select = ["ALL"]
 fixable = ["ALL"]
 unfixable = []
 
