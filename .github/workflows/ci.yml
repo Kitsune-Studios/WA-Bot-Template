@@ -10,14 +10,14 @@ env:
   GCP_REGION: us-central1
   GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
   GCP_BUCKET: ${{ secrets.GCP_BUCKET }}
-
+  
 jobs:
   build:
     name: Build & Sync Project Dependencies
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version:
+        python-version: &python_versions
           - "3.11"
 
     steps:
@@ -26,32 +26,42 @@ jobs:
         uses: astral-sh/setup-uv@v5
         with:
           python-version: ${{ matrix.python-version }}
+          enable-cache: true
+          prune-cache: false
+          ignore-nothing-to-cache: true
       - name: Sync the dependencies from the pyproject.toml
         run: uv sync --all-groups --dev
-      - name: Lint code with Ruff
-        run: uvx ruff check --fix --output-format=github
-      - name: Check code formatting with Ruff
-        run: uvx ruff format -q --diff
+      - name: Lint code with Ruff using Nox
+        run: uv run nox -s linter
+      - name: Check code formatting with Ruff using Nox
+        run: uv run nox -s fmt
 
   tests:
-    name: Test Suite
-    needs: setup-pipeline
+    name: Run tests
+    needs: build
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: 
+          - "3.11"
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
       - name: Install uv
         uses: astral-sh/setup-uv@v5
         with:
           version: "latest"
-          pyproject-file: "pyproject.toml"
+          python-version: ${{ matrix.python-version }}
       - name: Sync the dependencies from the pyproject.toml
         run: uv sync --all-extras --dev
       - name: Run tests with pytest
-        run: uvx nox -s tests
+        run: uv run nox -s tests
   
   deploy:
     name: Pulumi Deploy
-    needs: test
+    needs: [tests, build]
     runs-on: ubuntu-latest
 
     steps:

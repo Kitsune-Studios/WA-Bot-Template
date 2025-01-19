@@ -36,9 +36,9 @@ nox.options.sessions = [
     "linter",  #  to run linter
     "fmt",  #  to run formatter
     "run_tests",  # to run tests
-    "docker",  # to build & run docker container
-    "setup_pre_commit",  # to setup pre-commit hooks
-    "dev",  # to run the project locally
+    # "docker",  # to build & run docker container
+    # "setup_pre_commit",  # to setup pre-commit hooks
+    # "dev",  # to run the project locally
 ]
 # pyproject = nox.project.load_toml("pyproject.toml")  # noqa: ERA001
 
@@ -75,9 +75,10 @@ def run_tests(session: Session) -> None:
             "--cov",
             env={"COVERAGE_FILE": ".coverage"},
             external=True,
+            success_codes=[0, 5],
         )
-    except nox.command.CommandFailed(Exception) as e:
-        session.warn(e)
+    finally:
+        session.run("coverage", "report", "--fail-under=0", "--show-missing")
 
 
 # non-default sessions to run
