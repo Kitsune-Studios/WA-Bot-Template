@@ -75,14 +75,10 @@ uv sync # Install dependencies using uv
 ```bash
 cp .env.example .env # Copy the example environment file. Edit the .env file with your credentials
 ```
-4. Quick start
-```bash
-uv run quickstart # Run the quickstart script
-```
 
 ### Local Development
 
-5. Run the server:
+4. Run the server:
 - Using local development server:
 ```bash
 nox -s dev # Run the development server
