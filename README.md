@@ -73,7 +73,7 @@ uv sync --all-groups --dev # Install dependencies using uv
 3. Set up environment variables
 
 ```bash
-cp .env.example .env # Copy the example environment file. Edit the .env file with your credentials
+cp example.env.txt .env # Copy the example environment file. Edit the .env file with your credentials
 ```
 
 ### Local Development
