@@ -9,8 +9,7 @@ env:
   PULUMI_STACK_NAME: dev
   GCP_REGION: us-central1
   GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
-  GCP_BUCKET: ${{ secrets.GCP_BUCKET }}
-  PYTHON_VERSIONS: '["3.11", "3.12"]'
+  BUCKET_NAME: ${{ secrets.BUCKET_NAME }}
 
 jobs:
   build:
