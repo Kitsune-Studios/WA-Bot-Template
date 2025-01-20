@@ -91,6 +91,8 @@ nox -s docker # Build and run the Docker container
  >[!NOTE]
  > The server will be running on http://localhost:8000 by default on both methods.
 
+Happy coding! 🚀
+
 ***For development, additional tools are available:***
 - pre-commit for git hooks and code formatting (optional)
 - Ruff for linting and formatting code
@@ -132,13 +134,6 @@ nox -s lint # Lint code
 ```
 ## External References
 
-Project files:
-- [Dockerfile](./Dockerfile) - Container configuration
-- [noxfile.py](./noxfile.py) - Development automation
-- [pyproject.toml](./pyproject.toml) - Project dependencies and configuration
-- [.pre-commit-config.yaml](./.pre-commit-config.yaml) - Git hooks configuration
-- [backend/main.py](./backend/main.py) - Main application entry point
-
 Documentation:
 - [FastAPI Docs](https://fastapi.tiangolo.com/)
 - [Docker Docs](https://docs.docker.com/)
@@ -147,9 +142,9 @@ Documentation:
     - [ruff](https://docs.astral.sh/ruff/getting-started/installation/)
 - [Mangum](https://github.com/jordaneremieff/mangum)
 - [Pulumi](https://www.pulumi.com/)
-    -[Pulumi AWS](https://www.pulumi.com/docs/reference/clouds/aws/)
-    -[Pulumi GCP](https://www.pulumi.com/docs/reference/clouds/gcp/)
-- [Ngrok](https://ngrok.com/)
+    - [Pulumi AWS](https://www.pulumi.com/docs/reference/clouds/aws/)
+    - [Pulumi GCP](https://www.pulumi.com/docs/reference/clouds/gcp/)
+- [Ngrok](https://ngrok.com/) (soon to be deprecated)
 - [Nox](https://nox.thea.codes/)
 
 
