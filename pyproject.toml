@@ -33,6 +33,7 @@ dependencies = [
     "pulumi-docker>=4.6.1",
     "pulumi-esc-sdk>=0.11.0",
     "pulumi-gcp>=8.14.0",
+    "pulumi-github>=6.6.0",
     "pulumi-random>=4.16.8",
     "requests>=2.32.3",
     "uvicorn>=0.34.0",
@@ -71,7 +72,7 @@ indent-width = 4
 [tool.ruff.lint]
 # select = ["E4", "E7", "E9", "F", "W", "C", "D", "I", "R", "T", "B", "C", "E", "F", "I", "N", "R", "T", "W"] 
 select =["ALL"]
-ignore = ["S","D104"]
+ignore = ["S","D104","ERA001"]
 fixable = ["ALL"]
 unfixable = []
 

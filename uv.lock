@@ -817,6 +817,20 @@ wheels = [
 ]
 
 [[package]]
+name = "pulumi-github"
+version = "6.6.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "parver" },
+    { name = "pulumi" },
+    { name = "semver" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/22/a7/2f535e8c8c953c228c3a09c7d919c67699e321db566ded1c6f57079149d6/pulumi_github-6.6.0.tar.gz", hash = "sha256:8983f78b4ecea77ff9ab2bf643faa0e477117f314aae60d2239bf5d5e6208be3", size = 195963 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/05/c5/6ab65e30e4f6df965386d2cb842a460b37bc04a37defd4b6c0f729312163/pulumi_github-6.6.0-py3-none-any.whl", hash = "sha256:70d95238094ebecd1ee2226f30660a85c45476e145d636808e4e97255f3ab93d", size = 363707 },
+]
+
+[[package]]
 name = "pulumi-random"
 version = "4.17.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1269,6 +1283,7 @@ dependencies = [
     { name = "pulumi-docker" },
     { name = "pulumi-esc-sdk" },
     { name = "pulumi-gcp" },
+    { name = "pulumi-github" },
     { name = "pulumi-random" },
     { name = "requests" },
     { name = "uvicorn" },
@@ -1293,6 +1308,7 @@ requires-dist = [
     { name = "pulumi-docker", specifier = ">=4.6.1" },
     { name = "pulumi-esc-sdk", specifier = ">=0.11.0" },
     { name = "pulumi-gcp", specifier = ">=8.14.0" },
+    { name = "pulumi-github", specifier = ">=6.6.0" },
     { name = "pulumi-random", specifier = ">=4.16.8" },
     { name = "requests", specifier = ">=2.32.3" },
     { name = "uvicorn", specifier = ">=0.34.0" },

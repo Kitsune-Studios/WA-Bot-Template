@@ -1,11 +1,10 @@
 name: Kitsune-Studios
-description: WA bot template
+description: A minimal GitHub Python Pulumi program
 runtime:
   name: python
   options:
     toolchain: uv
-    typechecker: pyright
 config:
   pulumi:tags:
     value:
-      pulumi:template: gcp-python
+      pulumi:template: github-python
