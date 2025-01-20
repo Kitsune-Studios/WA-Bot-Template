@@ -3,7 +3,7 @@ name: CI/CD Pipeline
 on:
   workflow_dispatch:
   schedule:
-    - cron: '*/1 * * * *' # Every 1 minute
+    - cron: '*/5 * * * *' # Every 1 minute
 
 env:
   PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
@@ -22,7 +22,6 @@ jobs:
       matrix:
         python-version:
           - "3.11"
-          - "3.12"
     steps:
       - uses: actions/checkout@v4
       - name: Install uv and set the python version
@@ -45,7 +44,9 @@ jobs:
     runs-on: self-hosted
     strategy:
       matrix:
-        python-version: ${{ fromJson(needs.build.matrix.python-version) }}
+        python-version:
+          - "3.11"
+
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
