@@ -24,4 +24,4 @@ else:
 # Create a GCP resource (Storage Bucket)
 
 # Export the DNS name of the bucket
-pulumi.export(bucket_name, bucket_name.url)
+pulumi.export(bucket_name, bucket.url)
