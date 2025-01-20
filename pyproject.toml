@@ -29,6 +29,7 @@ dependencies = [
     "mangum>=0.19.0",
     "ngrok>=1.4.0",
     "pre-commit>=4.0.1",
+    "pulumi-awsx>=2.21.0",
     "pulumi-docker>=4.6.1",
     "pulumi-esc-sdk>=0.11.0",
     "pulumi-gcp>=8.14.0",
