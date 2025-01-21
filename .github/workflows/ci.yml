@@ -12,6 +12,8 @@ env:
   GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
   BUCKET_NAME: ${{ secrets.BUCKET_NAME }}
   OICD_AWS_GH_ACTIONS: ${{ secrets.OICD_AWS_GH_ACTIONS }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  GH_ACCESS_TOKEN: ${{ secrets.GH_ACTIONS }}
 
 permissions:
   id-token: write
@@ -65,7 +67,7 @@ jobs:
         run: uv sync --all-extras --dev
       - name: Run tests with pytest
         run: uv run nox -s tests
-  
+
   deploy:
     name: Pulumi Deploy
     needs: [tests, build]
@@ -100,4 +102,3 @@ jobs:
           work-dir: infra/
           comment-on-summary: true
           diff: true
-      
