@@ -8,6 +8,7 @@ env:
   GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }}
   PULUMI_STACK_NAME: dev
   GCP_REGION: us-central1
+  AWS_REGION: us-east-1
   GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
   BUCKET_NAME: ${{ secrets.BUCKET_NAME }}
   OICD_AWS_GH_ACTIONS: ${{ secrets.OICD_AWS_GH_ACTIONS }}
@@ -88,7 +89,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ secrets.OICD_AWS_GH_ACTIONS }}
-          aws-region: us-east-1
+          aws-region: ${{ env.AWS_REGION }}
       - name: Pulumi Up
         uses: pulumi/actions@v6
         with:
