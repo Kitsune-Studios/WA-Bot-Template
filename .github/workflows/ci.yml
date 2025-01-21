@@ -10,6 +10,12 @@ env:
   GCP_REGION: us-central1
   GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
   BUCKET_NAME: ${{ secrets.BUCKET_NAME }}
+  OICD_AWS_GH_ACTIONS: ${{ secrets.OICD_AWS_GH_ACTIONS }}
+
+permissions:
+  id-token: write
+  contents: write
+  pull-requests: write
 
 jobs:
   build:
@@ -78,6 +84,11 @@ jobs:
         uses: google-github-actions/auth@v2
         with:
           credentials_json: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+      - name: Setup Cloud Provider [AWS]
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.OICD_AWS_GH_ACTIONS }}
+          aws-region: us-east-1
       - name: Pulumi Up
         uses: pulumi/actions@v6
         with:
