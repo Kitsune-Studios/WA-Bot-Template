@@ -29,6 +29,8 @@ dependencies = [
     "mangum>=0.19.0",
     "ngrok>=1.4.0",
     "pre-commit>=4.0.1",
+    "pulumi>=3.146.0",
+    "pulumi-aws>=6.66.3",
     "pulumi-awsx>=2.21.0",
     "pulumi-docker>=4.6.1",
     "pulumi-esc-sdk>=0.11.0",
@@ -72,7 +74,7 @@ indent-width = 4
 [tool.ruff.lint]
 # select = ["E4", "E7", "E9", "F", "W", "C", "D", "I", "R", "T", "B", "C", "E", "F", "I", "N", "R", "T", "W"] 
 select =["ALL"]
-ignore = ["S","D104","ERA001"]
+ignore = ["S","D104","ERA001","INP001"]
 fixable = ["ALL"]
 unfixable = []
 

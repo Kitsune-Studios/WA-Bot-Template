@@ -1,5 +1,5 @@
-name: Kitsune-Studios
-description: A minimal GitHub Python Pulumi program
+name: kitsune-studios
+description: A minimal AWS Python Pulumi program
 runtime:
   name: python
   options:
@@ -7,4 +7,4 @@ runtime:
 config:
   pulumi:tags:
     value:
-      pulumi:template: github-python
+      pulumi:template: aws-python
