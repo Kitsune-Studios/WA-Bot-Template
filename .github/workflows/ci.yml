@@ -13,7 +13,7 @@ env:
   BUCKET_NAME: ${{ secrets.BUCKET_NAME }}
   OICD_AWS_GH_ACTIONS: ${{ secrets.OICD_AWS_GH_ACTIONS }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  GH_ACCESS_TOKEN: ${{ secrets.GH_ACTIONS }}
+  GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
 permissions:
   id-token: write
