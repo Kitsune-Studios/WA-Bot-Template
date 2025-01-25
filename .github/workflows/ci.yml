@@ -41,8 +41,8 @@ jobs:
         run: uv sync --all-groups --dev
       - name: Lint code with Ruff
         run: uvx ruff check
-      - name: Check code formatting with Ruff using Nox
-        run: uv run nox -s fmt
+      - name: Check code formatting with Ruff
+        run: uvx ruff format
 
   tests:
     name: Run tests
