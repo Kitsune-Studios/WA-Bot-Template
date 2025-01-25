@@ -63,7 +63,7 @@ for more information about UV installation and shell autocomplete, please visit 
 1. Clone the repository
 
 ```bash
-git clone https://github.com/Kitsune-Studios/WA-Bot-Template.git && cd $_ # Clone the repository and change directory
+git clone https://github.com/Kitsune-Studios/WA-Bot-Template.git && cd $_ # Download and navigate to the project directory
 ```
 
 2. Install dependencies:
@@ -124,7 +124,7 @@ pre-commit install --install-hooks # it will add the hooks to the git repository
 Some out of the box scripts are available for development and testing:
 
 ```bash
-nox -s [name] # Run specific session. e.g. nox -s docker check available sessions using nox -l
+uvx nox -s [name] # Run specific session. e.g. nox -s docker check available sessions using nox -l
 ```
 
 #### Ruff
