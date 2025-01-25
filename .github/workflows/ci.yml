@@ -84,12 +84,12 @@ jobs:
       - name: Sync uv dependencies
         run: uv sync --all-extras --dev
       - name: Setup Cloud Provider
-        if: ${{ github.actor == 'carlosferreyra' }}
+        if: ${{ github.actor != 'carlosferreyra' }}
         uses: google-github-actions/auth@v2
         with:
           credentials_json: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
       - name: Setup Cloud Provider
-        if: ${{ github.actor == 'lautaropacella' }}
+        if: ${{ github.actor != 'lautaropacella' }}
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ secrets.OICD_AWS_GH_ACTIONS }}
