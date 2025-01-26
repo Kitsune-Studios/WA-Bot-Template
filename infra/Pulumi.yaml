@@ -1,5 +1,5 @@
 name: kitsune
-description: A Python program to deploy a virtual machine on Amazon EC2
+description: A Python program to deploy a virtual machine on Amazon EC2 and Docker container deployment
 runtime:
   name: python
   options:
