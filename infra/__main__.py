@@ -4,7 +4,7 @@ import pulumi
 import pulumi_aws as aws
 
 # Get some configuration values or set default values.
-config = pulumi.Config()
+config = pulumi.Config("aws")
 instance_type = config.get("instanceType")
 if instance_type is None:
     instance_type = "t3.micro"
@@ -81,6 +81,12 @@ sec_group = aws.ec2.SecurityGroup(
             "protocol": "tcp",
             "cidr_blocks": ["0.0.0.0/0"],
         },
+        {
+            "from_port": 22,
+            "to_port": 22,
+            "protocol": "tcp",
+            "cidr_blocks": ["0.0.0.0/0"],
+        },
     ],
     egress=[
         {
@@ -91,10 +97,11 @@ sec_group = aws.ec2.SecurityGroup(
         },
     ],
 )
-
+zone = config.get("availabilityZone") or "a"
+region = config.get("region") or "us-east-1"
 # Create and launch an EC2 instance into the public subnet.
 server = aws.ec2.Instance(
-    "server",
+    resource_name="server",
     instance_type=instance_type,
     subnet_id=subnet.id,
     vpc_security_group_ids=[sec_group.id],
@@ -103,6 +110,7 @@ server = aws.ec2.Instance(
     tags={
         "Name": "webserver",
     },
+    availability_zone=region + "-" + zone,
 )
 
 # Export the instance's publicly accessible IP address and hostname.
