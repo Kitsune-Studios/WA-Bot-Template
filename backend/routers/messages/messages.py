@@ -1,8 +1,9 @@
 """Routes for handling messages."""
 
+from os import getenv
+
 from fastapi import APIRouter, Request, status
 from fastapi.responses import PlainTextResponse
-from os import getenv
 
 from backend.routers.utils import get_wa_data, is_user_message
 from backend.services.messaging import send_message

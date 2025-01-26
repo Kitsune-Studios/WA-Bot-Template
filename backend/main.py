@@ -28,7 +28,7 @@ async def lifespan() -> ngrok.NgrokTunnel:
 
 app = FastAPI(lifespan=lifespan)
 handler = Mangum(app)
-NOW = datetime.now()
+NOW = datetime.now(tz="UTC")
 
 
 @app.get("/", status_code=status.HTTP_200_OK, tags=["App Info"])

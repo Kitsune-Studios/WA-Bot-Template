@@ -1289,6 +1289,7 @@ dependencies = [
     { name = "pulumi-gcp" },
     { name = "pulumi-github" },
     { name = "pulumi-random" },
+    { name = "python-dotenv" },
     { name = "requests" },
     { name = "uvicorn" },
 ]
@@ -1316,6 +1317,7 @@ requires-dist = [
     { name = "pulumi-gcp", specifier = ">=8.14.0" },
     { name = "pulumi-github", specifier = ">=6.6.0" },
     { name = "pulumi-random", specifier = ">=4.16.8" },
+    { name = "python-dotenv", specifier = ">=1.0.1" },
     { name = "requests", specifier = ">=2.32.3" },
     { name = "uvicorn", specifier = ">=0.34.0" },
 ]
