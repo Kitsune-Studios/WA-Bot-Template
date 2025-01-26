@@ -2,7 +2,6 @@
 
 import pulumi
 import pulumi_aws as aws
-import pulumi_docker as docker
 
 # Get some configuration values or set default values.
 config = pulumi.Config("aws")
@@ -14,7 +13,7 @@ if vpc_network_cidr is None:
     vpc_network_cidr = "10.0.0.0/16"
 
 # Docker image configuration
-docker_image_name = config.require("dockerImageName")
+
 
 # Look up the latest Amazon Linux 2 AMI.
 ami = aws.ec2.get_ami(
@@ -29,12 +28,9 @@ ami = aws.ec2.get_ami(
 ).id
 
 # User data to install Docker and run the container
-user_data = f"""#!/bin/bash
-sudo yum update -y
-sudo amazon-linux-extras install docker -y
-sudo service docker start
-sudo usermod -a -G docker ec2-user
-docker run -d -p 80:8000 {docker_image_name}
+user_data = """#!/bin/bash
+echo "Hello, World from Pulumi!" > index.html
+nohup python -m SimpleHTTPServer 80 &
 """
 
 # Create VPC.
@@ -121,12 +117,6 @@ server = aws.ec2.Instance(
 )
 
 # Build and push Docker image
-image = docker.Image(
-    "appImage",
-    build=docker.DockerBuild(context=".."),
-    image_name=docker_image_name,
-    skip_push=False,
-)
 
 # Export the instance's publicly accessible IP address and hostname.
 pulumi.export("ip", server.public_ip)
