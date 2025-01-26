@@ -27,7 +27,6 @@ dependencies = [
     "boto3>=1.35.94",
     "fastapi[standard]>=0.115.6",
     "mangum>=0.19.0",
-    "ngrok>=1.4.0",
     "pre-commit>=4.0.1",
     "pulumi>=3.146.0",
     "pulumi-aws>=6.66.3",
@@ -40,10 +39,12 @@ dependencies = [
     "requests>=2.32.3",
     "uvicorn>=0.34.0",
     "python-dotenv>=1.0.1",
+    "ngrok>=1.4.0",
 ]
 
 [dependency-groups]
 dev = [
+    "dotenv-linter>=0.5.0",
     "httpx>=0.28.1",
     "pyright[nodejs]>=1.1.392.post0",
     "pytest>=8.3.4",

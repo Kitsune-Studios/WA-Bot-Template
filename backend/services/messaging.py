@@ -5,10 +5,13 @@ from os import getenv
 
 import requests
 
+assert getenv("WA_API_ACCESS_TOKEN") is not None, "WA_API_ACCESS_TOKEN is not set"
 HEADERS = {
     "Content-type": "application/json",
-    "Authorization": f"Bearer {getenv('ACCESS_TOKEN')}",
+    "Authorization": f"Bearer {getenv('WA_API_ACCESS_TOKEN')}",
 }
+assert getenv("PHONE_NUMBER_ID") is not None, "PHONE_NUMBER_ID is not set"
+assert getenv("VERSION") is not None, "VERSION is not set"
 URL = f"https://graph.facebook.com/{getenv('VERSION')}/{getenv('PHONE_NUMBER_ID')}/messages"
 
 STATUS_OK = 200

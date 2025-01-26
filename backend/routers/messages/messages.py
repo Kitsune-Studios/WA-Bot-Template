@@ -16,7 +16,7 @@ router = APIRouter()
 @router.get("/message", status_code=status.HTTP_200_OK)
 async def subscribe(request: Request) -> str:
     """Subscribe to the WhatsApp webhook."""
-    if request.query_params.get("hub.verify_token") == getenv("VERIFY_TOKEN"):
+    if request.query_params.get("hub.verify_token") == getenv("WA_VERIFY_TOKEN"):
         return PlainTextResponse(request.query_params.get("hub.challenge"))
     return "Authentication failed. Invalid Token."
 
