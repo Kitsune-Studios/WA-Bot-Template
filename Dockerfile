@@ -17,4 +17,4 @@ WORKDIR /app
 RUN uv sync --frozen --no-cache
 
 # Run the application.
-CMD ["/app/.venv/bin/uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", ${PORT_NUMBER}]
+CMD ["uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "8000"]
