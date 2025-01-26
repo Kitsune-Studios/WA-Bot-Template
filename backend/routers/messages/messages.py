@@ -2,8 +2,8 @@
 
 from fastapi import APIRouter, Request, status
 from fastapi.responses import PlainTextResponse
+from os import getenv
 
-from backend.auth import VERIFY_TOKEN
 from backend.routers.utils import get_wa_data, is_user_message
 from backend.services.messaging import send_message
 
@@ -15,7 +15,7 @@ router = APIRouter()
 @router.get("/message", status_code=status.HTTP_200_OK)
 async def subscribe(request: Request) -> str:
     """Subscribe to the WhatsApp webhook."""
-    if request.query_params.get("hub.verify_token") == VERIFY_TOKEN:
+    if request.query_params.get("hub.verify_token") == getenv("VERIFY_TOKEN"):
         return PlainTextResponse(request.query_params.get("hub.challenge"))
     return "Authentication failed. Invalid Token."
 

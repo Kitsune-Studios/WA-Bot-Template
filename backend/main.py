@@ -10,9 +10,8 @@ from mangum import Mangum
 
 from backend.routers.messages import messages
 
-from .auth import NGROK_AUTH_TOKEN, NGROK_DOMAIN
-
-TZ = getenv("TZ", "UTC")
+NGROK_AUTH_TOKEN = getenv("NGROK_AUTH_TOKEN")
+NGROK_DOMAIN = getenv("NGROK_DOMAIN")
 
 
 @asynccontextmanager
@@ -29,7 +28,7 @@ async def lifespan() -> ngrok.NgrokTunnel:
 
 app = FastAPI(lifespan=lifespan)
 handler = Mangum(app)
-NOW = datetime.now(TZ)
+NOW = datetime.now()
 
 
 @app.get("/", status_code=status.HTTP_200_OK, tags=["App Info"])

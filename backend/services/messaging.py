@@ -1,16 +1,15 @@
 """Provides functions to send messages via the WhatsApp Business API."""
 
 import json
+from os import getenv
 
 import requests
 
-from backend.auth import ACCESS_TOKEN, PHONE_NUMBER_ID, VERSION
-
 HEADERS = {
     "Content-type": "application/json",
-    "Authorization": f"Bearer {ACCESS_TOKEN}",
+    "Authorization": f"Bearer {getenv('ACCESS_TOKEN')}",
 }
-URL = f"https://graph.facebook.com/{VERSION}/{PHONE_NUMBER_ID}/messages"
+URL = f"https://graph.facebook.com/{getenv('VERSION')}/{getenv('PHONE_NUMBER_ID')}/messages"
 
 STATUS_OK = 200
 
