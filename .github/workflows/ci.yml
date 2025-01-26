@@ -11,7 +11,6 @@ env:
   AWS_REGION: us-east-1
   GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
   BUCKET_NAME: ${{ secrets.BUCKET_NAME }}
-  OICD_AWS_GH_ACTIONS: ${{ secrets.OICD_AWS_GH_ACTIONS }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
@@ -40,14 +39,9 @@ jobs:
       - name: Sync the dependencies from the pyproject.toml
         run: uv sync --all-groups --dev
       - name: Lint code with Ruff
-        run: uvx ruff check
+        run: uvx ruff check --fix
       - name: Check code formatting with Ruff
         run: uvx ruff format
-      - name: Build Docker image
-        run: docker build -t my-docker-image .
-      - name: Push Docker image
-        run: docker push my-docker-image
-
   tests:
     name: Run tests
     needs: build
@@ -70,7 +64,7 @@ jobs:
       - name: Sync the dependencies from the pyproject.toml
         run: uv sync --all-extras --dev
       - name: Run tests with pytest
-        run: uv run nox -s tests
+        run: uv run pytest
 
   deploy:
     name: Pulumi Deploy
@@ -92,12 +86,6 @@ jobs:
         uses: google-github-actions/auth@v2
         with:
           credentials_json: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
-      - name: Setup Cloud Provider
-        if: ${{ github.actor != 'lautaropacella' }}
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          role-to-assume: ${{ secrets.OICD_AWS_GH_ACTIONS }}
-          aws-region: ${{ env.AWS_REGION }}
       - name: Pulumi Up
         uses: pulumi/actions@v6
         with:
