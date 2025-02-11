@@ -1,7 +1,7 @@
 """Main module for FastAPI app."""
 
 from contextlib import asynccontextmanager
-from datetime import datetime
+from datetime import UTC, datetime
 from os import getenv
 
 import ngrok
@@ -28,7 +28,7 @@ async def lifespan() -> ngrok.NgrokTunnel:
 
 app = FastAPI(lifespan=lifespan)
 handler = Mangum(app)
-NOW = datetime.now()
+NOW = datetime.now(tz=UTC)
 
 
 @app.get("/", status_code=status.HTTP_200_OK, tags=["App Info"])

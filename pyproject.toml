@@ -5,7 +5,7 @@ name = "wa-bot-template"
 version = "0.1.1"
 description = "Template for WA bot using FastAPI and uv"
 readme = "README.md"
-license-files = ["LICENSE"]
+license = { file = "LICENSE" }
 requires-python = ">=3.11"
 authors = [
     { name = "Lautaro Pacella", email = "lautaropacella@hotmail.com" },
@@ -17,10 +17,7 @@ classifiers = [
     "Development Status :: 4 - Beta",
     "Programming Language :: Python :: 3.11",
     "Framework :: FastAPI",
-    "Operating System :: OS Independent",
     "License :: OSI Approved :: MIT License",
-    "Intended Audience :: Developers",
-    "Infrastructure :: Serverless",
 ]
 
 dependencies = [
@@ -44,10 +41,15 @@ dependencies = [
 ]
 
 [dependency-groups]
-dev = ["pyright[nodejs]>=1.1.392.post0", "pytest>=8.3.4", "pytest-cov>=6.0.0"]
-
-[project.optional-dependencies]
-
+dev = [
+    "factory-boy>=3.3.3",
+    "faker>=36.1.0",
+    "httpx>=0.28.1",
+    "pyright[nodejs]>=1.1.392.post0",
+    "pytest>=8.3.4",
+    "pytest-asyncio>=0.25.3",
+    "pytest-cov>=6.0.0",
+]
 
 # UV configuration
 [tool.uv]
@@ -55,23 +57,16 @@ preview = true
 default-groups = ["dev"]
 required-version = ">=0.5.18"
 upgrade = true
-# managed = false # Uncomment this line to disable the managed mode
-
-
-# Hatchling configuration
-# [build-system]
-# requires = ["hatchling"]
-# build-backend = "hatchling.build"
 
 # Ruff configuration
 [tool.ruff]
 target-version = "py311"
 line-length = 88
 indent-width = 4
+
 [tool.ruff.lint]
-# select = ["E4", "E7", "E9", "F", "W", "C", "D", "I", "R", "T", "B", "C", "E", "F", "I", "N", "R", "T", "W"] 
 select = ["ALL"]
-ignore = ["S", "D104", "ERA001", "INP001"]
+ignore = ["S", "D104", "ERA001", "INP001","PLR2004"]
 fixable = ["ALL"]
 unfixable = []
 
@@ -84,10 +79,22 @@ line-ending = "auto"
 # Pytest configuration
 [tool.pytest.ini_options]
 minversion = "8.0"
-addopts = "-ra -q --cov"
+addopts = "-v --cov=backend --cov-report=term-missing --asyncio-mode=auto"
 testpaths = ["tests"]
+asyncio_mode = "auto"
 
 # Coverage configuration
 [tool.coverage.run]
 source = ["backend"]
-omit = ["tests/*"]
+omit = ["tests/*", "**/__init__.py"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "pass",
+]
+show_missing = true
+fail_under = 80
