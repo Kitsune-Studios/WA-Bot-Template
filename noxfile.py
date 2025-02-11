@@ -1,130 +1,134 @@
-# /// script
-# requires-python = ">=3.11"
-# dependencies = [
-#     "python-dotenv",
-#     "nox",
-# ]
-# ///
-"""Main nox automation script."""
+"""Nox automation script for project tasks and testing."""
 
-import pathlib
+import subprocess
 from os import getenv
+from pathlib import Path
 
 import nox
-import nox.command
 from dotenv import load_dotenv
 from nox.sessions import Session
 
+# Load environment variables
 load_dotenv()
-EXTERNAL = getenv("EXTERNAL", "True") == "True"
-KEEP_VENV = getenv("KEEP_VENV", "True") == "True"
+
+# Constants
+PYTHON_VERSION = Path(".python-version").read_text().strip()
+PROJECT_NAME = Path.cwd().name
+EXTERNAL = getenv("EXTERNAL", "True").lower() == "true"
+KEEP_VENV = getenv("KEEP_VENV", "True").lower() == "true"
 PORT_NUMBER = int(getenv("PORT_NUMBER", "8000"))
-PYTHON_VERSION = (
-    pathlib.Path(".python-version").read_text().strip()
-)  # read python version from .python-version file
-python_version = PYTHON_VERSION
+BACKEND = "uv"  # Alternative options: "venv", "conda"
+
+# Default sessions
+nox.options.sessions = ["tests"]
 
 
-BACKEND = "uv"  # or "venv" or "conda"
+def get_docker_name(name: str | None = None) -> str:
+    """Return the docker container/image name.
 
-name = pathlib.Path().name  # get the project name from the current directory
+    Args:
+        name: Optional custom name. Uses PROJECT_NAME if not provided.
 
-# Nox sessions to run by default
+    Returns:
+        str: Docker container/image name
 
-nox.options.sessions = [
-    "tests",  # to run tests
-    # "docker",  # to build & run docker container
-    # "setup_pre_commit",  # to setup pre-commit hooks
-    # "dev",  # to run the project locally
-]
+    """
+    return name if name else PROJECT_NAME
 
 
-@nox.session(python=python_version, venv_backend=BACKEND, reuse_venv=KEEP_VENV)
+@nox.session(python=["3.11"])
 def tests(session: Session) -> None:
-    """Run the pytest test suite."""
-    try:
-        session.run(
-            "pytest",
-            "--cov",
-            env={"COVERAGE_FILE": ".coverage"},
-            external=EXTERNAL,
-            success_codes=[0, 5],
-        )
-    finally:
-        session.run("coverage", "report", "--fail-under=0", "--show-missing")
+    """Run the test suite using the project's settings.
+
+    Instead of installing packages, we first sync the uv configuration
+    to make available project settings from pyproject.toml.
+    """
+    session.run("uv", "sync", "--all-groups", external=EXTERNAL)
+    session.run("pytest", *session.posargs)
 
 
-# non-default sessions to run
+# Docker management commands
+@nox.session(python=PYTHON_VERSION, venv_backend=BACKEND, reuse_venv=KEEP_VENV)
+def docker(session: Session) -> None:
+    """Build and run the project in a Docker container."""
+    docker_name = get_docker_name()
+    session.log(f"Building Docker image: {docker_name}")
+    session.run("docker", "build", "-t", docker_name, ".", external=EXTERNAL)
+    docker_run(session, docker_name)
 
 
-@nox.session(python=python_version, venv_backend=BACKEND, reuse_venv=KEEP_VENV)
-def docker_run(session: nox.Session, docker_name: str) -> None:
-    """Run the project dev environment in docker container."""
+@nox.session(python=PYTHON_VERSION, venv_backend=BACKEND, reuse_venv=KEEP_VENV)
+def docker_run(session: Session, docker_name: str) -> None:
+    """Run a Docker container with the specified configuration.
+
+    Args:
+        session: Nox session instance for running commands
+        docker_name: Name of the Docker image to run
+
+    """
     session.run(
         "docker",
         "run",
         "--name",
-        name,
+        docker_name,
         "-p",
-        str(PORT_NUMBER) + ":" + str(PORT_NUMBER),
+        f"{PORT_NUMBER}:{PORT_NUMBER}",
         "-d",
         docker_name,
+        external=EXTERNAL,
     )
 
 
-@nox.session(python=python_version, venv_backend=BACKEND, reuse_venv=KEEP_VENV)
-def docker(session: nox.Session) -> None:
-    """Build & Run the project dev environment in docker container."""
-    session.log("Building the docker image: %s", name)
-    session.run("docker", "build", "-t", name, ".", external=EXTERNAL)
-    docker_run(session, name)
+@nox.session(python=PYTHON_VERSION, venv_backend=BACKEND, reuse_venv=KEEP_VENV)
+def docker_stop(session: Session, docker_name: str | None = None) -> None:
+    """Stop a running Docker container."""
+    name = get_docker_name(docker_name)
+    session.log(f"Stopping Docker container: {name}")
+    session.run("docker", "stop", name, external=EXTERNAL)
 
 
-@nox.session(python=python_version, venv_backend=BACKEND, reuse_venv=KEEP_VENV)
-def docker_stop(session: nox.Session, docker_name: str = "") -> None:
-    """Stop the running docker container."""
-    session.log("Stopping the docker container: %s", docker_name)
-    docker_name = name if docker_name == "" else docker_name
-    session.run("docker", "stop", docker_name, external=EXTERNAL)
+@nox.session(python=PYTHON_VERSION, venv_backend=BACKEND, reuse_venv=KEEP_VENV)
+def docker_start(session: Session, docker_name: str | None = None) -> None:
+    """Start a stopped Docker container."""
+    name = get_docker_name(docker_name)
+    session.log(f"Starting Docker container: {name}")
+    session.run("docker", "start", name, external=EXTERNAL)
 
 
-@nox.session(python=python_version, venv_backend=BACKEND, reuse_venv=KEEP_VENV)
-def docker_start(session: nox.Session, docker_name: str = "") -> None:
-    """Start the stopped docker container."""
-    docker_name = name if docker_name == "" else docker_name
-    session.log("Starting the docker container: %s", docker_name)
-    session.run("docker", "start", docker_name, external=EXTERNAL)
+@nox.session(python=PYTHON_VERSION, venv_backend=BACKEND, reuse_venv=KEEP_VENV)
+def docker_rm(session: Session, docker_name: str | None = None) -> None:
+    """Remove a Docker container."""
+    name = get_docker_name(docker_name)
+    docker_stop(session, name)
+    session.log(f"Removing Docker container: {name}")
+    session.run("docker", "rm", name, external=EXTERNAL)
 
 
-@nox.session(python=python_version, venv_backend=BACKEND, reuse_venv=KEEP_VENV)
-def docker_rm(session: nox.Session, docker_name: str = "") -> None:
-    """Remove the docker container."""
-    docker_name = name if docker_name == "" else docker_name
-    session.log("Stopping the docker container if any: %s", docker_name)
-    docker_stop(session, docker_name)
-    session.log("Removing the docker container: %s", docker_name)
-    session.run("docker", "rm", docker_name, external=EXTERNAL)
+@nox.session(python=PYTHON_VERSION, venv_backend=BACKEND, reuse_venv=KEEP_VENV)
+def docker_rmi(session: Session, docker_name: str | None = None) -> None:
+    """Remove a Docker image and its container."""
+    name = get_docker_name(docker_name)
+    docker_rm(session, name)
+    session.log(f"Removing Docker image: {name}")
+    session.run("docker", "rmi", name, external=EXTERNAL)
 
 
-@nox.session(python=python_version, venv_backend=BACKEND, reuse_venv=KEEP_VENV)
-def docker_rmi(session: nox.Session, docker_name: str = "") -> None:
-    """Remove the docker image."""
-    session.log("Removing the docker container if any: %s", docker_name)
-    docker_rm(session, docker_name)
-    session.log("Removing the docker image: %s", docker_name)
-    docker_name = name if docker_name == "" else docker_name
-    session.run("docker", "rmi", docker_name, external=EXTERNAL)
+# Development commands
+@nox.session(python=PYTHON_VERSION, venv_backend=BACKEND, reuse_venv=KEEP_VENV)
+def dev(session: Session) -> None:
+    """Run the project in development mode."""
+    try:
+        session.run("uv", "sync", "--all-groups", external=EXTERNAL)
+        session.run("uv", "run", "./main.py", external=EXTERNAL)
+    except (subprocess.CalledProcessError, OSError) as e:
+        session.error(f"Development server failed: {e}")
 
 
-@nox.session(python=python_version, venv_backend=BACKEND, reuse_venv=KEEP_VENV)
-def dev(session: nox.Session) -> None:
-    """Run the project dev environment locally."""
-    session.run("uv", "sync", "--all-groups")
-    session.run("uv", "run", "./main.py", external=EXTERNAL)
-
-
-@nox.session(python=python_version, venv_backend=BACKEND, reuse_venv=KEEP_VENV)
-def setup_pre_commit(session: nox.Session) -> None:
-    """Set up pre-commit hooks."""
-    session.run("pre-commit", "install", external=EXTERNAL)
-    session.run("pre-commit", "install", "-t", "pre-push", external=EXTERNAL)
+@nox.session(python=PYTHON_VERSION, venv_backend=BACKEND, reuse_venv=KEEP_VENV)
+def setup_pre_commit(session: Session) -> None:
+    """Configure pre-commit and pre-push hooks."""
+    try:
+        session.run("pre-commit", "install", external=EXTERNAL)
+        session.run("pre-commit", "install", "-t", "pre-push", external=EXTERNAL)
+    except (subprocess.CalledProcessError, OSError) as e:
+        session.error(f"Failed to setup pre-commit hooks: {e}")
