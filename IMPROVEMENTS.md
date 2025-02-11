@@ -16,15 +16,10 @@ infra/            # Infrastructure as Code (Pulumi)
 ## Recommendations (Pending Tasks)
 
 ### 2. Testing Framework
-- Testing structure improvements:
-  - Add integration tests directory
-  - Implement test factories
-  - Add API test fixtures
-  - Add end-to-end test suite
+- Add end-to-end test suite
 
 ### 3. FastAPI Enhancement
 - API improvements:
-  - Add middleware directory
   - Implement dependency injection container
   - Add API versioning
   - Add OpenAPI documentation customization
