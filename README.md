@@ -11,6 +11,7 @@ A WhatsApp bot template built with FastAPI and uv package manager, designed to b
     - [Pre-commit (optional)](#pre-commit-optional)
     - [Nox](#nox)
     - [Ruff](#ruff)
+- [Testing](#testing)
 - [External References](#external-references)
 - [License](#license)
 
@@ -108,6 +109,32 @@ uvx ruff check # Check code formatting
 ```bash
 uvx ruff format # Format code
 ```
+
+## Testing
+
+To ensure the quality and functionality of the project, a comprehensive suite of tests is provided. The testing framework used in this project is `pytest`.
+
+### Running Tests
+
+1. Install the required dependencies for testing:
+```bash
+uv sync --all-groups --dev # Install all dependencies including dev dependencies
+```
+2. Run the tests:
+```bash
+nox -s tests # This will run all the tests using Nox
+```
+
+### Test Structure
+
+- Unit tests are located in the `backend/tests` directory.
+- Integration tests are located in the `backend/tests/integration` directory.
+
+### Faker
+
+The project uses `faker` for generating fake data during testing. This helps in creating realistic test cases and scenarios.
+
+For more information on `faker`, you can visit the [Faker documentation](https://faker.readthedocs.io/en/master/).
 
 ## External References
 Documentation:
